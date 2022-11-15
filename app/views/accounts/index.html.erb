@@ -1,0 +1,47 @@
+
+
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+      <div class="row">
+        <div class="col">
+          <h4>Accounts </h4>
+        </div>
+        <div class="col text-end">
+          <% if policy(:account).new? %>
+           <%= link_to "New account", new_account_path, class: "btn btn-sm btn-outline-dark" %>
+          <% end %>
+        </div>
+      </div>
+
+      <table class="table table-striped">
+        <tbody>
+          <% @accounts.each do |account| %>
+            <tr>
+              <td><%= account.name %></td>
+              <td><%= account.private_api_key %></td>
+              <% if policy(:account_role).index? || policy(:account).edit? || policy(:account).destroy? %>
+              <td>
+                <div class="btn-group">
+                  <% if policy(:account_role).index? %>
+                    <%= link_to "Users", account_roles_path(account), class: "btn btn-sm btn-outline-dark" %>
+                  <% end %>
+                  <% if policy(:account).edit? %>
+                    <%= link_to "Edit", edit_account_path(account), class: "btn btn-sm btn-outline-dark" %>
+                  <% end %>
+                  <% if policy(:account).destroy? %>
+                    <%= button_to "Delete", account, method: :delete, class: "btn btn-sm btn-outline-dark", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+                  <% end %>
+                </div>
+              </td>
+              <% end %>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+

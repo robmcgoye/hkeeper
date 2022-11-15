@@ -1,0 +1,26 @@
+<%= form_with model: job, url: post_url, :data => {:turbo => "false"} do |f| %>
+  <%= render 'shared/error_messages', resource: job %>
+  <div class="field form-group">
+    <%= f.label "Status" %><br />
+    <%= f.select :status, options_for_select(Job.statuses.map {|key, value| [key.titleize, Job.statuses.key(value)]}, job.status), {}, {class: "form-select"} %>
+  </div>
+  <div class="field form-group">
+    <%= f.label "Action" %><br />
+    <%= f.text_field :action, autofocus: true, class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.label "Days in between runs" %><br />
+    <%= f.number_field :days_to_recur, class: "form-control" %>
+  </div>    
+  <div class="field form-group">
+    <%= f.label "Run after" %><br />
+    <%= f.date_field :execute_after, autofocus: true, class: "form-control" %>
+  </div>
+  <div class="field form-group pb-2">
+    <%= f.label "Notes" %><br />
+    <%= f.text_area :notes, rows: 10, class: "form-control shadow rounded" %>
+  </div>
+  <div class="align-self-end actions pb-1">
+    <%= f.submit class: "btn btn-sm btn-outline-dark" %>
+  </div>
+<% end %>

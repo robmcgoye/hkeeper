@@ -1,0 +1,11 @@
+<h5 class="pt-1">API Key</h5>
+<%= form_with model: account, url: account_api_key_path(account), :data => {:turbo => "false"} do |f| %>
+  <div class="row">
+    <div class="col field form-group">
+      <%= f.text_field :private_api_key, disabled: true, class: "form-control" %>
+    </div>
+    <div class="col-auto align-self-center">
+      <%= f.submit "Generate New Key", class: "btn btn-sm btn-outline-dark" %>
+    </div>
+  </div>
+<% end %>

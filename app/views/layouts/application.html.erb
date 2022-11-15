@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>House Keeper</title>
+    <%# <meta name="viewport" content="width=device-width,initial-scale=1"> %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar-->
+      <% if user_signed_in? %>
+        <%= render "layouts/sidebar" %>
+      <% end %>
+      <!-- Page content wrapper-->
+      <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <%= render "layouts/navbar" %>
+        <!-- Page content-->
+        <div class="container-fluid">
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

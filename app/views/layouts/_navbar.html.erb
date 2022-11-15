@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+  <div class="container-fluid" data-controller="sidebar">
+    <% if user_signed_in? %>
+      <button class="btn btn-primary" id="sidebarToggle" data-action="click->sidebar#toggle">Toggle Menu</button>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <% if user_signed_in? %>
+        <span class="navbar-text ps-3">
+          <%= "Welcome #{current_user.email}" %>
+        </span>
+      <% end %>
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "#{request.path == root_path  ? "nav-link active" : "nav-link"}" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Profile", profile_path, class: "#{request.path == profile_path  ? "nav-link active" : "nav-link"}" %>
+          </li>
+        <% end %>
+        <li class="nav-item ps-3 pt-1">
+          <% if user_signed_in? %>
+            <%= button_to 'Logout', logout_path, class: 'btn btn-sm btn-outline-light', method: :delete %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "btn btn-sm btn-outline-light" %>
+            <%= link_to "Sign Up", sign_up_path, class: "btn btn-sm btn-outline-light" %>
+          <% end %>        
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

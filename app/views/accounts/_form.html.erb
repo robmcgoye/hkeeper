@@ -1,0 +1,14 @@
+<%= form_with model: account, :data => {:turbo => "false"} do |f| %>
+  <%= render 'shared/error_messages', resource: account %>
+  <div class="row">
+    <div class="col field form-group">
+      <%= f.label "Name" %><br />
+      <%= f.text_field :name, autofocus: true, placeholder: "Account Name", class: "form-control" %>
+    </div>
+    <div class="col-auto align-self-end actions pb-1">
+      <%= f.submit class: "btn btn-sm btn-outline-dark" %>
+    </div>
+  </div>
+<% end %>
+
+

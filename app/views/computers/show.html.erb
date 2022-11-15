@@ -1,0 +1,122 @@
+<div class="card shadow-sm">
+  <div class="card-header">
+    <div class="row">
+      <div class="col">
+        <%= @computer.name %>
+      </div>
+      <div class="col">
+        ACCOUNT: <i><%= @computer.account.name %></i>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col-auto">
+              Manufacturer
+            </div>
+            <div class="col">
+              <%= @computer.manufacturer %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              Make
+            </div>
+            <div class="col">
+              <%= @computer.make %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              Model
+            </div>
+            <div class="col">
+              <%= @computer.model %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              CPU
+            </div>
+            <div class="col">
+              <%= @computer.cpu %>
+            </div>
+          </div>
+        </div>
+        <div class="col">                  
+          <div class="row">
+            <div class="col-auto">
+              OS
+            </div>
+            <div class="col">
+              <%= @computer.operating_system %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              Serial #
+            </div>
+            <div class="col">
+              <%= @computer.serial_number %>
+            </div>
+          </div>      
+          <div class="row">
+            <div class="col-auto">
+              MB Serial #
+            </div>
+            <div class="col">
+              <%= @computer.mb_serial_number %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <h5>Jobs</h5>
+      </div>
+      <div class="col">
+        <div class="btn-group">
+          <%= link_to "New Job", new_computer_job_path(@computer), class: "btn btn-sm btn-outline-dark" %>
+          <%= link_to "Back to Computers", computers_path, class: "btn btn-sm btn-outline-dark" %>
+          <%= button_to "Delete Computer", computer_path(@computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+        </div>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <th>Status</th>
+        <th>Action</th>
+        <th>Next Run</th>
+        <th>Freq</th>
+        <th></th>
+      </thead>
+      <% @jobs.order(:execute_after).reverse_order.each do |job| %>
+        <tr>
+          <td><%= job.status %></td>
+          <td><%= job.action %></td>
+          <td><%= job.execute_after.strftime('%b %d %Y') unless job.execute_after.nil? %></td>
+          <td><%= job.days_to_recur %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to "View", job_path(job), class: "btn btn-sm btn-outline-dark" %>
+              <%= link_to "Edit", edit_job_path(job), class: "btn btn-sm btn-outline-dark" %>
+              <%= button_to "Delete", job_path(job), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <% if @pagy.pages > 1 %>
+      <div class="d-flex justify-content-center">
+        <%== render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
+      </div>
+    <% end %>
+  </div>
+</div>

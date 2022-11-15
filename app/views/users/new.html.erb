@@ -1,0 +1,41 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+
+      <h1>Sign Up!</h1>
+
+      <%= form_with model: @user, url: sign_up_path, :data => {:turbo => "false"} do |f| %>
+        <%= render 'shared/error_messages', resource: @user %>
+        <div class="field form-group">
+          <%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autofocus: true, required: true, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :last_name %><br />
+          <%= f.text_field :last_name, autofocus: true, required: true, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :email %><br />
+          <%= f.text_field :email, autofocus: true, required: true, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autofocus: true, required: true, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, required: true, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :phone %><br />
+          <%= f.text_field :phone, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="actions pt-2">
+          <%= f.submit class: "btn btn-sm btn-outline-dark" %>
+        </div>
+      <% end %>
+
+
+    </div>
+  </div>
+</div>

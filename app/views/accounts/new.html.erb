@@ -1,0 +1,17 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+
+      <h1>New account</h1>
+
+      <%= render "form", account: @account %>
+      
+      <br>
+
+      <div>
+        <%= link_to "Back to accounts", accounts_path, class: "btn btn-sm btn-outline-dark" %>
+      </div>
+
+    </div>
+  </div>
+</div>
