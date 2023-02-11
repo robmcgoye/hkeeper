@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :domains
   
   resources :accounts, except: [:show] do
     resources :api_keys, only: :update

@@ -1,20 +1,21 @@
-class AccountPolicy < ApplicationPolicy
+class DomainPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
       if @user.has_any_role? :admin, :tech
         scope.all
       else
-        scope.with_role(:manager, @user)
+        scope.where(account_id: (Account.with_role(:manager, @user).pluck(:id)))
       end
     end
-  end
-
-  def show?
   end
   
   def new?
     create?
+  end
+
+  def show?
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.account }
   end
 
   def create?
@@ -26,11 +27,11 @@ class AccountPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.has_any_role? :admin, :tech, { name: :creator, resource: @account }
+    @user.has_any_role? :admin, :tech
   end
 
   def destroy?
-    @user.has_any_role? :admin, { name: :creator, resource: @account }
+    @user.has_any_role? :admin
   end 
 
 end

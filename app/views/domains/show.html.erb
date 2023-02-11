@@ -1,0 +1,13 @@
+
+
+<%= render @domain %>
+
+<div class="btn-group">
+  <% if policy(:domain).edit? %>
+    <%= link_to "Edit this domain", edit_domain_path(@domain), class: "btn btn-sm btn-outline-dark" %>
+  <% end %>
+  <%= link_to "Back to domains", domains_path, class: "btn btn-sm btn-outline-dark" %>
+  <% if policy(:domain).destroy? %>
+    <%= button_to "Delete", @domain, method: :delete, class: "btn btn-sm btn-outline-dark", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+  <% end %>
+</div>

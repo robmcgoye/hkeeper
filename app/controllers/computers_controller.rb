@@ -1,6 +1,6 @@
 class ComputersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_computer, only: [ :show, :destroy ]
+  before_action :set_computer, only: [ :edit, :update, :show, :destroy ]
   
   def index
     @computers = policy_scope(Computer)
@@ -9,6 +9,17 @@ class ComputersController < ApplicationController
   def show
     @pagy, @jobs = pagy(@computer.jobs)
     # @pagy, @jobs = pagy(@computer.jobs, page: 2)
+  end
+
+  def edit
+  end
+
+  def update
+    if @computer.update(computer_params)
+      redirect_to computer_url(@computer), notice: "The notes were successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy  
@@ -24,4 +35,7 @@ class ComputersController < ApplicationController
     authorize @computer
   end
 
+  def computer_params
+    params.require(:computer).permit(:notes)
+  end
 end

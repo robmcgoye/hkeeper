@@ -1,49 +1,33 @@
 <h1>Computers</h1>
+<%= link_to "Download Computer Client", "/client_app/hkeeper.zip", class: "btn btn-sm btn-outline-dark" %>
 
-<div class="album py-3">
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-      <% @computers.each do |computer| %>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-header">
-              <div class="row">
-                <div class="col">
-                  <%= computer.name %>
-                </div>
-                <div class="col-auto">
-                  <i><%= computer.account.name %></i>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="card-text">
-                <table class="table table-borderless">
-                  <tr>
-                    <td>Manufacturer</td>
-                    <td><%= computer.manufacturer %></td>
-                  </tr>
-                  <tr>
-                    <td>Make</td>
-                    <td><%= computer.make %></td>
-                  </tr>
-                  <tr>
-                    <td>Model</td>
-                    <td><%= computer.model %></td>
-                  </tr> 
-                </table> 
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <%= link_to "View", computer_path(computer), class: "btn btn-sm btn-outline-dark" %>
-                  <%= button_to "Delete", computer_path(computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
-                </div>
-              </div>
-            </div>
+<div id="computers">
+  <table class="table table-striped">
+
+    <thead>
+      <th>Account</th>
+      <th>Computer Name</th>
+      <th></th>
+    </thead>
+
+    <% @computers.each do |computer| %>
+      <tr>
+        <td><%= computer.account.name %></td>
+        <td><%= computer.name %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to "View", computer_path(computer), class: "btn btn-sm btn-outline-dark" %>
+            <% # if policy(:domain).edit? %>
+              <% # = link_to "Edit", edit_computer_path(computer), class: "btn btn-sm btn-outline-dark" %>
+            <% # end %>
+            <% if policy(:computer).destroy? %>
+              <%= button_to "Delete", computer_path(computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+            <% end %>
           </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
+

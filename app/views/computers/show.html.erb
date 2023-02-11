@@ -71,8 +71,27 @@
               <%= @computer.mb_serial_number %>
             </div>
           </div>
+          <div class="row">
+            <div class="col-auto">
+               Key 
+            </div>
+            <div class="col">
+              <%= @computer.key %>
+            </div>
+          </div>
         </div>
       </div>
+      <% if policy(:computer).edit? %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Notes</h5>
+            <p class="card-text" style="white-space: pre-wrap;"><%= @computer.notes %></p>
+            <div class="btn-group py-1">
+              <%= link_to "Edit Notes", edit_computer_path(@computer), class: "btn btn-sm btn-outline-dark" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </p>
     <hr>
     <div class="row">
@@ -83,7 +102,9 @@
         <div class="btn-group">
           <%= link_to "New Job", new_computer_job_path(@computer), class: "btn btn-sm btn-outline-dark" %>
           <%= link_to "Back to Computers", computers_path, class: "btn btn-sm btn-outline-dark" %>
-          <%= button_to "Delete Computer", computer_path(@computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+          <% if policy(:computer).edit? %>
+            <%= button_to "Delete Computer", computer_path(@computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+          <% end %>
         </div>
       </div>
     </div>

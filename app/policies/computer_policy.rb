@@ -10,11 +10,19 @@ class ComputerPolicy < ApplicationPolicy
     end
   end
   
-  # def index?
-  #   @user.has_any_role? :admin, :tech
-  # end
+  def edit?
+    @user.has_any_role? :admin, :tech
+  end
+
+  def update?
+    edit?
+  end
+  
   def show?
-    # Need to test for account managers too!
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.account }
+  end
+  
+  def destroy?
     @user.has_any_role? :admin, :tech
   end
 

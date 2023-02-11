@@ -1,0 +1,43 @@
+<div id="<%= dom_id domain %>">
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= domain.name %></h5>
+
+      <div class="row">
+        <div class="col">
+          <p class="card-text">
+            <b>Account:</b> <%= domain.account.name %><br>
+            <b>Expires on:</b> <%= domain.expires_on.strftime(" %m/%d/%Y") %><br>
+            <span class="text-nowrap pe-3">
+              <i class="<%= domain.web_hosting? || domain.web_hosting? ? "bi bi-toggle-on" : "bi bi-toggle-off" %>"></i>
+              Web Hosting
+            </span>
+            <span class="text-nowrap pe-3">
+              <i class="<%= domain.email_hosting? || domain.email_hosting? ? "bi bi-toggle-on" : "bi bi-toggle-off" %>"></i>
+              Email Hosting
+            </span>
+            <span class="text-nowrap pe-2">
+              <i class="<%= domain.registration? || domain.registration? ? "bi bi-toggle-on" : "bi bi-toggle-off" %>"></i>
+              Domain Registration        
+            </span>
+          </p>
+        </div>
+        <div class="col">
+          <b>Billed on:</b> <%= domain.billed_date %><br>
+          <b>Annual Fee:</b> <%= humanized_money_with_symbol domain.annual_fee %> <br>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Notes</h6>
+          <p class="card-text">
+            <%= domain.notes %>
+          </p>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+</div>

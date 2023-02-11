@@ -1,0 +1,92 @@
+<div class="card shadow-sm">
+  <div class="card-header">
+    <div class="row">
+      <div class="col">
+        <%= @computer.name %>
+      </div>
+      <div class="col">
+        ACCOUNT: <i><%= @computer.account.name %></i>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col-auto">
+              Manufacturer
+            </div>
+            <div class="col">
+              <%= @computer.manufacturer %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              Make
+            </div>
+            <div class="col">
+              <%= @computer.make %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              Model
+            </div>
+            <div class="col">
+              <%= @computer.model %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              CPU
+            </div>
+            <div class="col">
+              <%= @computer.cpu %>
+            </div>
+          </div>
+        </div>
+        <div class="col">                  
+          <div class="row">
+            <div class="col-auto">
+              OS
+            </div>
+            <div class="col">
+              <%= @computer.operating_system %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              Serial #
+            </div>
+            <div class="col">
+              <%= @computer.serial_number %>
+            </div>
+          </div>      
+          <div class="row">
+            <div class="col-auto">
+              MB Serial #
+            </div>
+            <div class="col">
+              <%= @computer.mb_serial_number %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+               Key 
+            </div>
+            <div class="col">
+              <%= @computer.key %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+       <%= render "form", computer: @computer %>
+      </div>
+    </p>
+
+
+  </div>
+</div>

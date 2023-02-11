@@ -60,6 +60,7 @@ gem 'pundit', '~> 2.2'
 gem 'resque', '~> 2.4'
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 gem 'whenever', '~> 1.0', require: false
+gem 'money-rails', '~> 1.15'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

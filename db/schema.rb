@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_14_112204) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_22_210414) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -35,6 +35,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_112204) do
     t.datetime "last_contacted_at"
     t.index ["account_id"], name: "index_computers_on_account_id"
     t.index ["key"], name: "index_computers_on_key"
+  end
+
+  create_table "domains", force: :cascade do |t|
+    t.string "name"
+    t.datetime "expires_on"
+    t.datetime "billed_on"
+    t.text "notes"
+    t.boolean "web_hosting", default: false, null: false
+    t.integer "hosting_fee_cents", default: 0, null: false
+    t.string "hosting_fee_currency", default: "USD", null: false
+    t.boolean "email_hosting", default: false, null: false
+    t.boolean "registration", default: false, null: false
+    t.integer "registration_fee_cents", default: 0, null: false
+    t.string "registration_fee_currency", default: "USD", null: false
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_domains_on_account_id"
   end
 
   create_table "job_events", force: :cascade do |t|
@@ -91,6 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_112204) do
   end
 
   add_foreign_key "computers", "accounts"
+  add_foreign_key "domains", "accounts"
   add_foreign_key "job_events", "jobs"
   add_foreign_key "jobs", "computers"
 end
