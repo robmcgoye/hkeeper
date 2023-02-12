@@ -1,9 +1,0 @@
-jobs:
-  check_disk: Check Disk
-  update_computer: Update Computer
-  repair_image: Repair Image
-  sfc_scan: SFC Scan
-  install_updates: Install Updates
-  delete_temp_files: Delete Temp Files
-  optimize_volumes: Optimize Volumes
-  rebuild_indexes: Rebuild Indexes

@@ -6,9 +6,6 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-LISTS = YAML.load(File.read(File.expand_path('../lists.yml', __FILE__)))
-LISTS.merge! LISTS.fetch(Rails.env, {})
-LISTS.symbolize_keys!
 CONFIG = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
 CONFIG.merge! CONFIG.fetch(Rails.env, {})
 CONFIG.symbolize_keys!

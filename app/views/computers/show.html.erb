@@ -14,32 +14,32 @@
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col-auto">
-              Manufacturer
+            <div class="col-auto text-primary">
+              Manufacturer : 
             </div>
             <div class="col">
               <%= @computer.manufacturer %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              Make
+            <div class="col-auto text-primary">
+              Make : 
             </div>
             <div class="col">
               <%= @computer.make %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              Model
+            <div class="col-auto text-primary">
+              Model : 
             </div>
             <div class="col">
               <%= @computer.model %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              CPU
+            <div class="col-auto text-primary">
+              CPU : 
             </div>
             <div class="col">
               <%= @computer.cpu %>
@@ -48,32 +48,32 @@
         </div>
         <div class="col">                  
           <div class="row">
-            <div class="col-auto">
-              OS
+            <div class="col-auto text-primary">
+              OS : 
             </div>
             <div class="col">
               <%= @computer.operating_system %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              Serial #
+            <div class="col-auto text-primary">
+              Serial # : 
             </div>
             <div class="col">
               <%= @computer.serial_number %>
             </div>
           </div>      
           <div class="row">
-            <div class="col-auto">
-              MB Serial #
+            <div class="col-auto text-primary">
+              MB Serial # : 
             </div>
             <div class="col">
               <%= @computer.mb_serial_number %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-               Key 
+            <div class="col-auto text-primary">
+               Key : 
             </div>
             <div class="col">
               <%= @computer.key %>
@@ -82,11 +82,11 @@
         </div>
       </div>
       <% if policy(:computer).edit? %>
-        <div class="card">
-          <div class="card-body">
+        <div class="card pt-2">
+          <div class="card-body pt-1 ps-1">
             <h5 class="card-title">Notes</h5>
             <p class="card-text" style="white-space: pre-wrap;"><%= @computer.notes %></p>
-            <div class="btn-group py-1">
+            <div class="btn-group pt-1 ps-1">
               <%= link_to "Edit Notes", edit_computer_path(@computer), class: "btn btn-sm btn-outline-dark" %>
             </div>
           </div>
@@ -100,9 +100,11 @@
       </div>
       <div class="col">
         <div class="btn-group">
+        <% if policy(:job).create? %>
           <%= link_to "New Job", new_computer_job_path(@computer), class: "btn btn-sm btn-outline-dark" %>
+          <% end %>
           <%= link_to "Back to Computers", computers_path, class: "btn btn-sm btn-outline-dark" %>
-          <% if policy(:computer).edit? %>
+          <% if policy(:computer).destroy? %>
             <%= button_to "Delete Computer", computer_path(@computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
           <% end %>
         </div>
@@ -120,14 +122,18 @@
       <% @jobs.order(:execute_after).reverse_order.each do |job| %>
         <tr>
           <td><%= job.status %></td>
-          <td><%= job.action %></td>
+          <td><%= job.get_action %></td>
           <td><%= job.execute_after.strftime('%b %d %Y') unless job.execute_after.nil? %></td>
           <td><%= job.days_to_recur %></td>
           <td>
             <div class="btn-group">
               <%= link_to "View", job_path(job), class: "btn btn-sm btn-outline-dark" %>
-              <%= link_to "Edit", edit_job_path(job), class: "btn btn-sm btn-outline-dark" %>
-              <%= button_to "Delete", job_path(job), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+              <% if policy(:job).edit? %>
+                <%= link_to "Edit", edit_job_path(job), class: "btn btn-sm btn-outline-dark" %>
+              <% end %>
+              <% if policy(:job).destroy? %>
+                <%= button_to "Delete", job_path(job), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+              <% end %>
             </div>
           </td>
         </tr>

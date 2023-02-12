@@ -50,6 +50,7 @@ class JobsController < ApplicationController
     def set_job
       @job = Job.find(params[:id])
       @computer = @job.computer
+      authorize @job
     end
 
     def job_params

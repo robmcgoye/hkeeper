@@ -6,7 +6,7 @@
   </div>
   <div class="field form-group">
     <%= f.label "Action" %><br />
-    <%= f.text_field :action, autofocus: true, class: "form-control" %>
+    <%= f.select :action, options_for_select(Job.actions.map {|key, value| [key.titleize, Job.actions.key(value)]}, job.action), {}, {class: "form-select"} %>
   </div>
   <div class="field form-group">
     <%= f.label "Days in between runs" %><br />

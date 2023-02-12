@@ -15,5 +15,19 @@ class JobPolicy < ApplicationPolicy
     @user.has_any_role? :admin, :tech
   end
 
+  def edit?
+    update?
+  end
 
+  def update?
+    @user.has_any_role? :admin, :tech
+  end
+
+  def destroy?
+    @user.has_any_role? :admin, :tech
+  end
+
+  def show?
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.computer.account }
+  end
 end

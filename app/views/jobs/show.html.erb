@@ -10,10 +10,43 @@
     </div>
   </div>
   <div class="card-body">
-    <p class="card-text">
-      <%= @job.status %>
-      <%= @job.action %>
-    </p>
+
+    <div class="row">
+      <div class="col-auto text-primary">
+        Status :
+      </div>
+      <div class="col">
+        <%= @job.status %>
+      </div>
+      <div class="col-auto text-primary">
+        Action : 
+      </div>
+      <div class="col">
+        <%= @job.get_action %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto text-primary">
+        Days to Recur :
+      </div>
+      <div class="col">
+        <%= @job.days_to_recur %>
+      </div>
+      <div class="col-auto text-primary">
+        Execute After : 
+      </div>
+      <div class="col">
+        <%= @job.execute_after.strftime('%b %d %Y') unless @job.execute_after.nil? %>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body pt-1 ps-1">
+        <h5 class="card-title">Notes</h5>
+        <p class="card-text" style="white-space: pre-wrap;"><%= @job.notes %></p>
+      </div>
+    </div>
+
     <hr>
     <div class="row">
       <div class="col">
