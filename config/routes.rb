@@ -40,5 +40,6 @@ Rails.application.routes.draw do
   get "profile", to: "users#edit"
   delete "profile", to: "users#destroy"
   get "users", to: "user_roles#index"
+  get "dashboard", to: "dashboards#index"
 
 end

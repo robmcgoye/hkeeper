@@ -9,6 +9,7 @@ class Account < ApplicationRecord
 
   before_create :set_private_api_key
   validates :private_api_key, uniqueness: true, allow_blank: true
+  validates :name, uniqueness: { case_sensitive: false }, presence: true
 
   private
 

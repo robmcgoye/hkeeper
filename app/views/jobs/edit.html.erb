@@ -1,11 +1,15 @@
 <div class="container py-3">
   <div class="card mb-3 shadow-lg rounded border">
     <div class="card-body text-dark">
-      <h4>Edit job for <%= @computer.name %></h4>
+      <h3>Edit job for <%= @computer.name %></h3>
       <%= render 'form', job: @job, post_url: job_path(@job) %>
       <div class="btn-group p-2">
-        <%= link_to "Back to #{@computer.name}", computer_path(@computer), class: "btn btn-sm btn-outline-dark" %> 
-         <%= link_to "Back to Computers", computers_path, class: "btn btn-sm btn-outline-dark" %> 
+        <%= link_to computer_path(@computer), class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i><%= "Back to #{@computer.name}" %>
+        <% end %>
+         <%= link_to computers_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to Computers
+        <% end %> 
       </div>
     </div>
   </div>

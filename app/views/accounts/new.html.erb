@@ -2,14 +2,16 @@
   <div class="card mb-3 shadow-lg rounded border">
     <div class="card-body text-dark">
 
-      <h1>New account</h1>
+      <h3>New account</h3>
 
       <%= render "form", account: @account %>
       
       <br>
 
-      <div>
-        <%= link_to "Back to accounts", accounts_path, class: "btn btn-sm btn-outline-dark" %>
+      <div class="btn-group">
+        <%= link_to accounts_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to accounts
+        <% end %>
       </div>
 
     </div>

@@ -1,13 +1,25 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
 
+      <%= render @domain %>
 
-<%= render @domain %>
+      <div class="btn-group pt-1">
+        <% if policy(:domain).edit? %>
+          <%= link_to edit_domain_path(@domain), class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-pencil pe-1"></i>Edit this domain
+          <% end %>
+        <% end %>
+        <%= link_to domains_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to domains
+        <% end %>
+        <% if policy(:domain).destroy? %>
+          <%= button_to @domain, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+            <i class="bi bi-trash pe-1"></i>Delete
+          <% end %>
+        <% end %>
+      </div>
 
-<div class="btn-group">
-  <% if policy(:domain).edit? %>
-    <%= link_to "Edit this domain", edit_domain_path(@domain), class: "btn btn-sm btn-outline-dark" %>
-  <% end %>
-  <%= link_to "Back to domains", domains_path, class: "btn btn-sm btn-outline-dark" %>
-  <% if policy(:domain).destroy? %>
-    <%= button_to "Delete", @domain, method: :delete, class: "btn btn-sm btn-outline-dark", form: {data: {turbo_confirm: 'Are you sure?'}} %>
-  <% end %>
+    </div>
+  </div>
 </div>

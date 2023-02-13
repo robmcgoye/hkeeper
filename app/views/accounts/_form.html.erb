@@ -5,8 +5,10 @@
       <%= f.label "Name" %><br />
       <%= f.text_field :name, autofocus: true, placeholder: "Account Name", class: "form-control" %>
     </div>
-    <div class="col-auto align-self-end actions pb-1">
-      <%= f.submit class: "btn btn-sm btn-outline-dark" %>
+    <div class="col-auto align-self-end pb-1">
+      <%= f.button nil, class: "btn btn-sm btn-outline-dark" do %>
+        <i class="bi bi-save pe-1"></i>Save Account
+      <% end %>
     </div>
   </div>
 <% end %>

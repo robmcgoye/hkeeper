@@ -1,35 +1,54 @@
-
-<div class="row">
-  <div class="col">
-    <h1>Domains</h1>
-  </div>
-  <div class="col-auto">
-    <% if policy(:domain).new? %>
-      <%= link_to "New domain", new_domain_path, class: "btn btn-sm btn-outline-dark" %>
-    <% end %>
-  </div>
-</div>
-
-<div id="domains">
-  <table class="table table-striped">
-    <% @domains.each do |domain| %>
-      <tr>
-        <td><%= domain.account.name %></td>
-        <td><%= domain.name %></td>
-        <td><%= domain.expires_on.strftime("Expires on %m/%d/%Y")  %></td>
-        <td>
-          <div class="btn-group">
-
-            <%= link_to "Show", domain, class: "btn btn-sm btn-outline-dark" %>
-            <% if policy(:domain).edit? %>
-              <%= link_to "Edit", edit_domain_path(domain), class: "btn btn-sm btn-outline-dark" %>
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+      <div class="row">
+        <div class="col">
+          <h3>Domains</h3>
+        </div>
+        <div class="col-auto">
+          <% if policy(:domain).new? %>
+            <%= link_to new_domain_path, class: "btn btn-sm btn-outline-dark" do %>
+              <i class="bi bi-plus-circle pe-1"></i>New domain
             <% end %>
-            <% if policy(:domain).destroy? %>
-              <%= button_to "Delete", domain, method: :delete, class: "btn btn-sm btn-outline-dark", form: {data: {turbo_confirm: 'Are you sure?'}} %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="domains">
+        <table class="table table-sm table-striped">
+          <thead class="table-secondary">
+            <th>Account</th>
+            <th>Name</th>
+            <th>Expires</th>
+            <th></th>
+          </thead>
+          <% @domains.each do |domain| %>
+            <tr>
+              <td><%= domain.account.name %></td>
+              <td><%= domain.name %></td>
+              <td><%= domain.expires_on.strftime("Expires on %m/%d/%Y")  %></td>
+              <td>
+                <div class="btn-group">
+
+                  <%= link_to domain, class: "btn btn-sm btn-outline-dark" do %>
+                    <i class="bi bi-folder-symlink pe-1"></i>View
+                  <% end %>
+                  <% if policy(:domain).edit? %>
+                    <%= link_to edit_domain_path(domain), class: "btn btn-sm btn-outline-dark" do %>
+                      <i class="bi bi-pencil pe-1"></i>Edit
+                    <% end %>
+                  <% end %>
+                  <% if policy(:domain).destroy? %>
+                    <%= button_to domain, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+                      <i class="bi bi-trash pe-1"></i>Delete
+                    <% end %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

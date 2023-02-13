@@ -1,7 +1,7 @@
 <div class="card shadow-sm">
   <div class="card-header">
     <div class="row">
-      <div class="col">
+      <div class="col fw-bold">
         <%= @computer.name %>
       </div>
       <div class="col">
@@ -14,32 +14,32 @@
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col-auto">
-              Manufacturer
+            <div class="col-auto text-primary">
+              Manufacturer :
             </div>
             <div class="col">
               <%= @computer.manufacturer %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              Make
+            <div class="col-auto text-primary">
+              Make :
             </div>
             <div class="col">
               <%= @computer.make %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              Model
+            <div class="col-auto text-primary">
+              Model :
             </div>
             <div class="col">
               <%= @computer.model %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              CPU
+            <div class="col-auto text-primary">
+              CPU :
             </div>
             <div class="col">
               <%= @computer.cpu %>
@@ -48,32 +48,32 @@
         </div>
         <div class="col">                  
           <div class="row">
-            <div class="col-auto">
-              OS
+            <div class="col-auto text-primary">
+              OS :
             </div>
             <div class="col">
               <%= @computer.operating_system %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-              Serial #
+            <div class="col-auto text-primary">
+              Serial # :
             </div>
             <div class="col">
               <%= @computer.serial_number %>
             </div>
           </div>      
           <div class="row">
-            <div class="col-auto">
-              MB Serial #
+            <div class="col-auto text-primary">
+              MB Serial # :
             </div>
             <div class="col">
               <%= @computer.mb_serial_number %>
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
-               Key 
+            <div class="col-auto text-primary">
+               Key :
             </div>
             <div class="col">
               <%= @computer.key %>
@@ -87,6 +87,13 @@
       </div>
     </p>
 
-
+    <div class="btn-group">
+      <%= link_to computer_path(@computer), class: "btn btn-sm btn-outline-dark" do %>
+        <i class="bi bi-arrow-left-circle pe-1"></i><%= "View #{@computer.name}"%>
+      <% end %>
+      <%= link_to computers_path, class: "btn btn-sm btn-outline-dark" do %>
+        <i class="bi bi-arrow-left-circle pe-1"></i>Back to Computers
+      <% end %>
+    </div>
   </div>
 </div>

@@ -20,7 +20,9 @@
     <%= f.label "Notes" %><br />
     <%= f.text_area :notes, rows: 10, class: "form-control shadow rounded" %>
   </div>
-  <div class="align-self-end actions pb-1">
-    <%= f.submit class: "btn btn-sm btn-outline-dark" %>
+  <div class="align-self-end pb-1">
+    <%= f.button nil, class: "btn btn-sm btn-outline-dark" do %>
+      <i class="bi bi-save pe-1"></i>Save
+    <% end %>
   </div>
 <% end %>

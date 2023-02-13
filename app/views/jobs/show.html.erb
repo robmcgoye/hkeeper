@@ -1,7 +1,7 @@
 <div class="card shadow-sm">
   <div class="card-header">
     <div class="row">
-      <div class="col">
+      <div class="col fw-bold">
         <%= @computer.name %>
       </div>
       <div class="col">
@@ -54,13 +54,17 @@
       </div>
       <div class="col">
         <div class="btn-group">
-          <%= link_to "Back to #{@computer.name}", computer_path(@computer), class: "btn btn-sm btn-outline-dark" %>
-          <%= link_to "Back to Computers", computers_path, class: "btn btn-sm btn-outline-dark" %>
+          <%= link_to computer_path(@computer), class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-arrow-left-circle pe-1"></i><%= "Back to #{@computer.name}"%>
+          <% end %>
+          <%= link_to computers_path, class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-arrow-left-circle pe-1"></i>Back to Computers
+          <% end %>
         </div>
       </div>
     </div>
-      <table class="table">
-        <thead>
+      <table class="table table-sm table-striped">
+        <thead class="table-dark">
           <th>Date</th>
           <th>Status</th>
           <th>Notes</th>

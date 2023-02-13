@@ -1,7 +1,7 @@
 <div class="card shadow-sm">
   <div class="card-header">
     <div class="row">
-      <div class="col">
+      <div class="col fw-bold">
         <%= @computer.name %>
       </div>
       <div class="col">
@@ -87,7 +87,9 @@
             <h5 class="card-title">Notes</h5>
             <p class="card-text" style="white-space: pre-wrap;"><%= @computer.notes %></p>
             <div class="btn-group pt-1 ps-1">
-              <%= link_to "Edit Notes", edit_computer_path(@computer), class: "btn btn-sm btn-outline-dark" %>
+              <%= link_to edit_computer_path(@computer), class: "btn btn-sm btn-outline-dark" do %>
+                <i class="bi bi-pencil-square pe-1"></i>Edit Notes
+              <% end %>
             </div>
           </div>
         </div>
@@ -95,24 +97,30 @@
     </p>
     <hr>
     <div class="row">
-      <div class="col">
+      <div class="col text-dark">
         <h5>Jobs</h5>
       </div>
       <div class="col">
         <div class="btn-group">
         <% if policy(:job).create? %>
-          <%= link_to "New Job", new_computer_job_path(@computer), class: "btn btn-sm btn-outline-dark" %>
+          <%= link_to new_computer_job_path(@computer), class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-plus-circle pe-1"></i>New Job
           <% end %>
-          <%= link_to "Back to Computers", computers_path, class: "btn btn-sm btn-outline-dark" %>
+        <% end %>
+          <%= link_to computers_path, class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-arrow-left-circle pe-1"></i>Back to Computers
+          <% end %>
           <% if policy(:computer).destroy? %>
-            <%= button_to "Delete Computer", computer_path(@computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+            <%= button_to computer_path(@computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+              <i class="bi bi-trash pe-1"></i>Delete Computer
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
 
-    <table class="table">
-      <thead>
+    <table class="table table-sm table-striped">
+      <thead class="table-dark">
         <th>Status</th>
         <th>Action</th>
         <th>Next Run</th>
@@ -127,12 +135,18 @@
           <td><%= job.days_to_recur %></td>
           <td>
             <div class="btn-group">
-              <%= link_to "View", job_path(job), class: "btn btn-sm btn-outline-dark" %>
+              <%= link_to job_path(job), class: "btn btn-sm btn-outline-dark" do %>
+                <i class="bi bi-folder-symlink pe-1"></i>View
+              <% end %>
               <% if policy(:job).edit? %>
-                <%= link_to "Edit", edit_job_path(job), class: "btn btn-sm btn-outline-dark" %>
+                <%= link_to edit_job_path(job), class: "btn btn-sm btn-outline-dark" do %>
+                  <i class="bi bi-pencil pe-1"></i>Edit
+                <% end %>
               <% end %>
               <% if policy(:job).destroy? %>
-                <%= button_to "Delete", job_path(job), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+                <%= button_to job_path(job), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+                  <i class="bi bi-trash pe-1"></i>Delete
+                <% end %>
               <% end %>
             </div>
           </td>

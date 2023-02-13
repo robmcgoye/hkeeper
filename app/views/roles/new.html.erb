@@ -1,21 +1,28 @@
 <div class="container py-3">
   <div class="card mb-3 shadow-lg rounded border">
     <div class="card-body text-dark">
-      <h4>Add manager to Account: <%= @account.name %></h4>
+      <h3>Add manager to Account: <%= @account.name %></h3>
       <% if User.all_except(@account.managers).any? %>
         <%= form_with url: account_roles_new_path(@account), method: :post, :data => {:turbo => "false"} do |f| %>
           <div class="field form-group">
              <%= f.select :user_id, User.all_except(@account.managers).collect{|p| [ p.email, p.id ]}, {}, class: "form-select" %>
           </div>
           <div class="actions pt-2 pb-2">
-            <%= f.submit "Add Manager", class: "btn btn-sm btn-outline-dark"%>
+            <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+              <i class="bi bi-plus-circle pe-1"></i>Add Manager
+            <% end %>
           </div>
         <% end %>
       <% else %>
        <p>All of the users have already been added to this account.</p>
       <% end %>
       <div class="btn-group">
-        <%= link_to "Back to Account Users", account_roles_path(@account), class: "btn btn-sm btn-outline-dark" %>
+        <%= link_to account_roles_path(@account), class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to Account Users
+        <% end %>
+        <%= link_to accounts_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to accounts
+        <% end %>        
       </div>
     </div>
   </div>

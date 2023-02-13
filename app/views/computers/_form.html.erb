@@ -6,7 +6,10 @@
     <%= f.text_area :notes, class: "form-control", rows: 8 %>
   </div>  
   <div class="actions pt-2">
-    <%= f.submit class: "btn btn-sm btn-outline-dark" %>
+
+    <%= f.button nil, class: "btn btn-sm btn-outline-dark" do %>
+      <i class="bi bi-save pe-1"></i>Save
+    <% end %>
   </div>
 
 <% end %>
