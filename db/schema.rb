@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_22_210414) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_14_012131) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -87,6 +87,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_210414) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "unifi_sites", force: :cascade do |t|
+    t.string "name"
+    t.integer "hosting_fee_cents", default: 0, null: false
+    t.string "hosting_fee_currency", default: "USD", null: false
+    t.datetime "billed_on"
+    t.text "notes"
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_unifi_sites_on_account_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -112,4 +124,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_210414) do
   add_foreign_key "domains", "accounts"
   add_foreign_key "job_events", "jobs"
   add_foreign_key "jobs", "computers"
+  add_foreign_key "unifi_sites", "accounts"
 end

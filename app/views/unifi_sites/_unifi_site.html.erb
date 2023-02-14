@@ -1,0 +1,25 @@
+<div class="card">
+
+  <div class="card-header fw-bold">
+    <%= unifi_site.name %>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+          <b>Account:</b> <%= unifi_site.account.name %><br>
+      </div>
+      <div class="col">
+        <b>Billed on:</b> <%= unifi_site.billed_date %><br>
+        <b>Annual Fee:</b> <%= humanized_money_with_symbol unifi_site.hosting_fee %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body pt-1 ps-1">
+        <h6 class="card-title">Notes</h6>
+        <p class="card-text">
+          <%= unifi_site.notes %>
+        </p>
+      </div>
+    </div>  
+  </div>
+</div>

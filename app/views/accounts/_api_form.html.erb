@@ -1,7 +1,7 @@
 <%= form_with model: account, url: account_api_key_path(account), :data => {:turbo => "false"} do |f| %>
   <div class="row">
     <div class="col field form-group">
-      <%= f.label "API Key" %><br />
+      <%= f.label :private_api_key, "API Key" %><br />
       <%= f.text_field :private_api_key, disabled: true, class: "form-control" %>
     </div>
     <div class="col-auto align-self-end pb-1">

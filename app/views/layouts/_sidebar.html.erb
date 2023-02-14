@@ -11,8 +11,8 @@
     <%= link_to "Computers", computers_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
     
     <%= link_to "Domains", domains_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+    <%= link_to "Unifi Sites", unifi_sites_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
 
-    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Tickets</a>
     <% if policy(:user_role).index? %>
       <%= link_to "Users", users_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
     <% end %>

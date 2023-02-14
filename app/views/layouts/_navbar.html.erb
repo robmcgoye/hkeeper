@@ -6,7 +6,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <% if user_signed_in? %>
-        <span class="navbar-text ps-3">
+        <span class="navbar-text ps-3 text-white">
           <%= "Welcome #{current_user.email}" %>
         </span>
       <% end %>

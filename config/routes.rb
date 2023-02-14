@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :domains
-  
+  resources :unifi_sites
   resources :accounts, except: [:show] do
     resources :api_keys, only: :update
     # resources :roles, except: [:show]
