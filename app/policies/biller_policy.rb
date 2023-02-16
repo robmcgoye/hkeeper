@@ -9,7 +9,7 @@ class BillerPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.has_role? :admin, :tech
+    @user.has_any_role? :admin, :tech
   end
 
   def edit?
