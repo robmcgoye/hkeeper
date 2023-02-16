@@ -1,0 +1,41 @@
+<%= form_with model: biller, url: post_url, :data => {:turbo => "false"} do |f| %>
+
+  <%= render 'shared/error_messages', resource: biller %>
+
+  <div class="field form-group pb-1">
+    <%= f.label "Address 1" %><br />
+    <%= f.text_field :address_line_1, placeholder: "Address 1", class: "form-control" %>
+  </div>
+  <div class="field form-group pb-1">
+    <%= f.label "Address 2" %><br />
+    <%= f.text_field :address_line_2, placeholder: "Address 2", class: "form-control" %>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-7 mb-2 field form-group">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "form-control", placeholder: "City" %>
+    </div>
+    <div class="col-md-2 mb-2 field form-group">
+      <%= f.label :state %>
+      <%= f.select :state, options_for_select(CS.states(:us),  biller.state), 
+                {include_blank: 'Choose...'}, 
+                class: "form-select", 
+                required: true %>
+    </div>
+    <div class="col-md-3 mb-2 field form-group">
+      <%= f.label :zip %>
+      <%= f.text_field :zip, class: "form-control", placeholder: "" %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.select :user_id, @account.managers.collect{|p| [ p.email, p.id ]}, {include_blank: 'Choose...'}, class: "form-select", required: true %>
+  </div>
+  <div class="actions pt-2">
+    <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+      <i class="bi bi-save pe-1"></i>Save
+    <% end %>  
+  </div>
+
+<% end %>

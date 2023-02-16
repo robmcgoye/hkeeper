@@ -4,11 +4,18 @@
 # http://en.wikipedia.org/wiki/Cron
 
 # Example:
-#
+# crontab -r 
+# whenever --update-crontab --set-environment='development'
+# 
 # set :output, "/path/to/my/cron_log.log"
 env :PATH, ENV['PATH']
 set :output, "./log/cron.log"
 #
+every 15.days do
+  runner "GenerateStatementsJob.perform_now"
+  # rake "statement.generate"
+end
+
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"

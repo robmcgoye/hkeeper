@@ -1,0 +1,36 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+      <div class="row">
+        <div class="col">
+          <h3>Statements</h3>
+        </div>
+        <div class="col-auto">
+
+        </div>
+      </div>
+
+        <table class="table table-sm table-striped">
+          <thead class="table-secondary">
+            <th>Date</th>
+            <th>Account</th>
+            <th>Invoice #</th>
+            <th>Status</th>
+            <th>Total</th>
+
+          </thead>
+          <% @statements.each do |statement| %>
+            <tr>
+              <td><%= statement.created_at.strftime(" %m/%d/%Y") %></td>
+              <td><%= statement.account.name %></td>
+              <td><%= statement.invoice_number %></td>
+              <td><%= statement.status %></td>
+              <td><%= Money.us_dollar(statement.total).format %></td>
+
+            </tr>
+          <% end %>
+        </table>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+      <h3>Billing Settings</h3>
+
+      <%= render "form", biller: @biller, post_url: account_biller_path(@account, @biller) %>
+
+      <div class="btn-group pt-1">
+        <%= link_to accounts_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to Accounts
+        <% end %>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -28,11 +28,6 @@
               <% if policy(:account_role).index? || policy(:account).edit? || policy(:account).destroy? %>
               <td>
                 <div class="btn-group">
-                  <% if policy(:account_role).index? %>
-                    <%= link_to account_roles_path(account), class: "btn btn-sm btn-outline-dark" do %>
-                      <i class="bi bi-people pe-1"></i>Users
-                    <% end %>
-                  <% end %>
                   <% if policy(:account).edit? %>
                     <%= link_to edit_account_path(account), class: "btn btn-sm btn-outline-dark" do %>
                       <i class="bi bi-pencil pe-1"></i>Edit
@@ -43,6 +38,22 @@
                       <i class="bi bi-trash"></i>Delete
                     <% end %>
                   <% end %>
+                  <% if policy(:biller).edit? %>
+                    <% if account.billers.count == 0 %>
+                      <% path = new_account_biller_path(account) %>
+                    <% else %>
+                      <% path = edit_account_biller_path(account, account.billers.first) %>
+                    <% end %>
+                    <%= link_to path, class: "btn btn-sm btn-outline-dark" do %>
+                      <i class="bi bi-gear pe-1"></i>Settings
+                    <% end %>
+                  <% end %>
+                  <% if policy(:account_role).index? %>
+                    <%= link_to account_roles_path(account), class: "btn btn-sm btn-outline-dark" do %>
+                      <i class="bi bi-people pe-1"></i>Users
+                    <% end %>
+                  <% end %>
+
                 </div>
               </td>
               <% end %>

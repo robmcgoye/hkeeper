@@ -25,7 +25,7 @@
       </div>
       <div class="col">
         <b>Billed on:</b> <%= domain.billed_date %><br>
-        <b>Annual Fee:</b> <%= humanized_money_with_symbol domain.annual_fee %>
+        <b>Annual Fee:</b> <%= Money.us_dollar(domain.annual_fee).format %>
       </div>
     </div>
     

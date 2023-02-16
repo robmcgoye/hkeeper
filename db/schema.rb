@@ -10,12 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_012131) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_14_160928) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "private_api_key"
+    t.boolean "active"
+  end
+
+  create_table "billers", force: :cascade do |t|
+    t.string "address_line_1"
+    t.string "address_line_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.integer "user_id"
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_billers_on_account_id"
   end
 
   create_table "computers", force: :cascade do |t|
@@ -76,6 +90,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_012131) do
     t.index ["computer_id"], name: "index_jobs_on_computer_id"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "USD", null: false
+    t.string "description"
+    t.integer "statement_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["statement_id"], name: "index_line_items_on_statement_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -85,6 +110,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_012131) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "statements", force: :cascade do |t|
+    t.integer "invoice_number"
+    t.integer "terms"
+    t.integer "status"
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_statements_on_account_id"
   end
 
   create_table "unifi_sites", force: :cascade do |t|
@@ -120,9 +155,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_012131) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "billers", "accounts"
   add_foreign_key "computers", "accounts"
   add_foreign_key "domains", "accounts"
   add_foreign_key "job_events", "jobs"
   add_foreign_key "jobs", "computers"
+  add_foreign_key "line_items", "statements"
+  add_foreign_key "statements", "accounts"
   add_foreign_key "unifi_sites", "accounts"
 end

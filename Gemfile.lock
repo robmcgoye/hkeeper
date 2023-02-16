@@ -103,6 +103,8 @@ GEM
     chartkick (5.0.1)
     childprocess (4.1.0)
     chronic (0.10.2)
+    city-state (0.1.0)
+      rubyzip (>= 1.1)
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
@@ -295,6 +297,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.2)
   capybara
   chartkick (~> 5.0, >= 5.0.1)
+  city-state (~> 0.1.0)
   cssbundling-rails
   debug
   ed25519 (~> 1.3)

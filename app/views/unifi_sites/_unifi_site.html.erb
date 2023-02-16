@@ -10,7 +10,7 @@
       </div>
       <div class="col">
         <b>Billed on:</b> <%= unifi_site.billed_date %><br>
-        <b>Annual Fee:</b> <%= humanized_money_with_symbol unifi_site.hosting_fee %>
+        <b>Annual Fee:</b> <%= unifi_site.hosting_fee.format %>
       </div>
     </div>
     <div class="card">

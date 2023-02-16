@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   resources :domains
   resources :unifi_sites
+  resources :statements, except: [:create, :new, :destroy]
   resources :accounts, except: [:show] do
+    resources :billers, only: [:create, :new, :edit, :update]
     resources :api_keys, only: :update
     # resources :roles, except: [:show]
     get "roles/new", to: "roles#new"
