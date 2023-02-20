@@ -1,0 +1,34 @@
+<div class="col-sm-6">
+  <div class="card">
+    <div class="card-header">
+      Invoice to:
+    </div>
+    <div class="card-body">
+      <div>
+        <span class="align-middle"><%= @statement.account.name %></span>
+      </div>
+      <div class="text-grey-m1">
+        <div class="my-1">
+          <%= @biller.address_line_1 %><br>
+          <%= @biller.address_line_2 %>
+        </div>
+        <div class="my-1">
+          <%= "#{@biller.city}, #{@biller.state} #{@biller.zip}"  %>
+        </div>
+        <div class="my-1">
+          <i class="bi bi-envelope text-primary"></i> <%= User.find(@biller.user_id).email %>
+        </div>
+      </div>
+    </div>
+  </div>            
+</div>
+<div class="col-sm-6 align-self-start d-sm-flex justify-content-end">
+  <div class="test-secondary">
+    <div class="fs-4 my-1"> <span class="fw-bold text-primary">Invoice #:</span>
+      <%= @statement.invoice_number %>
+    </div>
+    <div class="my-1"> <span class="fw-bold">Date:</span><%= @statement.created_at.strftime(" %m/%d/%Y") %></div>
+    <div class="my-1"> <span class="fw-bold">Due Date:</span><%= (@statement.created_at + (@statement.terms).days).strftime(" %m/%d/%Y") %></div>
+    <div class="my-1"> <span class="fw-bold">Status:</span> <span class="badge bg-warning px-25"><%= @statement.status %></span></div>
+  </div>
+</div>

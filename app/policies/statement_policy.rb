@@ -11,6 +11,7 @@ class StatementPolicy < ApplicationPolicy
   end
 
   def show?
+    authorized_roles?
   end
 
   private

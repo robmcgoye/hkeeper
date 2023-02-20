@@ -18,11 +18,15 @@
         <thead class="table-secondary">
           <th>Name</th>
           <th>API Key</th>
-          <th></th>
+          <th>
+            <%= link_to accounts_url({all: "#{@search_all == 1 ? '0' : '1'}"}), class: "btn btn-sm btn-outline-dark" do %>
+              <i class="bi bi-toggle-<%= "#{@search_all == 1 ? 'on' : 'off'}" %> pe-2"></i>All
+            <% end %>
+          </th>
         </thead>
         <tbody>
           <% @accounts.each do |account| %>
-            <tr>
+            <tr <%= "#{!account.active? ? " class=table-warning" : ""}" %> >
               <td><%= account.name %></td>
               <td><%= account.private_api_key %></td>
               <% if policy(:account_role).index? || policy(:account).edit? || policy(:account).destroy? %>

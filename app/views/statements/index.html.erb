@@ -17,7 +17,7 @@
             <th>Invoice #</th>
             <th>Status</th>
             <th>Total</th>
-
+<th></th>
           </thead>
           <% @statements.each do |statement| %>
             <tr>
@@ -26,7 +26,11 @@
               <td><%= statement.invoice_number %></td>
               <td><%= statement.status %></td>
               <td><%= Money.us_dollar(statement.total).format %></td>
-
+<td>
+                  <%= link_to statement, class: "btn btn-sm btn-outline-dark" do %>
+                    <i class="bi bi-folder-symlink pe-1"></i>View
+                  <% end %>
+</td>
             </tr>
           <% end %>
         </table>

@@ -3,7 +3,16 @@ class AccountsController < ApplicationController
   before_action :set_account, only: %i[ edit update destroy ]
 
   def index
-    @accounts = policy_scope(Account)
+    if params[:all].to_i == 1
+      @search_all = 1
+    else
+      @search_all = 0
+    end
+    if @search_all == 0
+      @accounts = policy_scope(Account).active_clients
+    else
+      @accounts = policy_scope(Account)
+    end
   end
 
   def new

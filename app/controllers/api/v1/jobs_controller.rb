@@ -8,7 +8,8 @@ class Api::V1::JobsController < Api::V1::BaseController
   end
 
   def completed
-    @job.execute_after = @job.execute_after + @job.days_to_recur.days
+    # @job.execute_after = @job.execute_after + @job.days_to_recur.days
+    @job.execute_after = Date.today + @job.days_to_recur.days
     if @job.status == "run_once"
       @job.status = "archived"
     end
