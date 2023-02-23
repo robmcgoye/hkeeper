@@ -1,78 +1,10 @@
 <div class="container py-3">
   <div class="card mb-3 shadow-lg rounded border">
     <div class="card-body text-dark">
-
       <div class="row">
         <%= render "nav" %>
         <hr>
-        <div class="container px-0">
-          <%= render "from" %>
-          <hr>
-          <div class="row">
-            <%= render "to" %>
-
-            <div class="table-responsive pt-3">
-              <table class="table table-striped">
-                <thead class="table-primary">
-                  <tr class="text-dark">
-                    <th class="text-start">Description</th>
-                    <th class="text-center">Qty</th>
-                    <th class="text-center">Unit Price</th>
-                    <th class="text-center" width="140">Amount</th>
-                  </tr>
-                </thead>
-                <tbody class="text-dark">
-                  <% total = 0 %>
-                  <% @statement.line_items.each do |item| %>
-                    <% subtotal = item.amount_cents * item.quantity %>
-                    <% total += subtotal %>
-                    <tr></tr>
-                    <tr>
-                      <td class="text-start" style="white-space: pre-wrap;"><%= item.description %></td>
-                      <td class="text-center"><%= item.quantity %></td>
-                      <td class="text-center"><%= Money.us_dollar(item.amount_cents).format %></td>
-                      <td class="text-center"><%= Money.us_dollar(subtotal).format %></td>
-                    </tr> 
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-
-            <div class=" container">
-              <div class="container px-0">
-                <div class="row mt-1">
-                  <div class="col-12 col-lg-12">
-                    <div class="mt-1">
-
-                      <div class="row mt-1">
-                        <div class="col-12 col-sm-7 text-grey-d2 mt-2 mt-lg-0">
-                          
-                        </div>
-
-                        <div class="col-12 col-sm-5 text-dark">
-                          <div class="row my-2">
-                            <div class="col-7 text-end">
-                              Total
-                            </div>
-                            <div class="col-5">
-                              <span class="text-dark"><%= Money.us_dollar(total).format %></span>
-                            </div>
-                          </div>
-
-
-                        </div>
-                      </div> 
-                      <div>
-                        <span class="text-secondary">Thank you for your business</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
+        <%= render "statement" %>
       </div>
     </div>
   </div>

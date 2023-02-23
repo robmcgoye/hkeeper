@@ -2,7 +2,7 @@ class Statement < ApplicationRecord
   belongs_to :account
   has_many :line_items, :dependent => :delete_all
 
-  enum :status, { unpaid: 0, paid: 1, voided: 2 }, default: :unpaid
+  enum :status, { pending: 0, unpaid: 1, paid: 2, voided: 3 }, default: :pending
 
   before_create do
     if Statement.count > 0
@@ -10,6 +10,8 @@ class Statement < ApplicationRecord
     else
       self.invoice_number = 100
     end 
+    self.invoiced_at = Date.today
+    self.terms = 15
   end
 
   def total

@@ -1,0 +1,43 @@
+<div class="container px-0">
+  <%= render "from" %>
+  <hr>
+  <div class="row">
+    <%= render "to" %>
+    <div class="pt-3">
+      <table class="table table-striped">
+        <thead class="table-primary">
+          <tr class="text-dark">
+            <th class="text-start">Description</th>
+            <th class="text-center">Qty</th>
+            <th class="text-center">Unit Price</th>
+            <th class="text-center" width="140">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-dark">
+          <% total = 0 %>
+          <% @statement.line_items.each do |item| %>
+            <% subtotal = item.amount_cents * item.quantity %>
+            <% total += subtotal %>
+            <tr>
+              <td class="text-start" style="white-space: pre-wrap;"><%= item.description %></td>
+              <td class="text-center"><%= item.quantity %></td>
+              <td class="text-center"><%= Money.us_dollar(item.amount_cents).format %></td>
+              <td class="text-center"><%= Money.us_dollar(subtotal).format %></td>
+            </tr> 
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-end">Total</td>
+            <td class="text-center"><%= Money.us_dollar(total).format %></td>
+          </tr>
+          </tfoot>
+      </table>
+    </div>
+
+    <div class="text-center container">
+      <span class="text-secondary">Thank you for your business.</span>
+    </div>
+    
+  </div>
+</div>

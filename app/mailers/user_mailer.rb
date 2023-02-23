@@ -15,4 +15,8 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Password Reset Instructions"
   end
     
+  # def new_invoice(user)
+  
+  # end
+
 end

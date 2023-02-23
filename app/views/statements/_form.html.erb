@@ -1,0 +1,25 @@
+<%= form_with model: statement, :data => {:turbo => "false"} do |f| %>
+  <%= render 'shared/error_messages', resource: statement %>
+
+  <div class="field form-group">
+    <%= f.label "Status" %><br />
+    <%= f.select :status, options_for_select(Statement.statuses.map {|key, value| [key.titleize, Statement.statuses.key(value)]}, statement.status), {}, {class: "form-select"} %>
+  </div>
+  
+  <div class="field form-group">
+    <%= f.label "Invoiced Date" %><br />
+    <%= f.date_field :invoiced_at, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label "Terms" %><br />
+    <%= f.number_field :terms, class: "form-control" %>
+  </div> 
+
+  <div class="actions py-2">
+    <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+      <i class="bi bi-save pe-1"></i>Save
+    <% end %>  
+  </div>
+
+<% end %>

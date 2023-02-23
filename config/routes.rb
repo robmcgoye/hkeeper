@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :domains
   resources :unifi_sites
   resources :statements, except: [:create, :new, :destroy]
+  get "statements/:id/invoice", to: "statements#pdf", as: "pdf_statement"
   resources :accounts, except: [:show] do
     resources :billers, only: [:create, :new, :edit, :update]
     resources :api_keys, only: :update

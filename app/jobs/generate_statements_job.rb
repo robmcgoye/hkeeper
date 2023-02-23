@@ -9,7 +9,6 @@ class GenerateStatementsJob < ApplicationJob
       if domains_to_be_billed.count > 0
         puts "creating statement..."
         statement = Statement.new
-        statement.terms = 15
         statement.account = account
         domains_to_be_billed.each do |domain|
           puts "adding line item"

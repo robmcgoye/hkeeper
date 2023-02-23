@@ -10,14 +10,26 @@ class StatementPolicy < ApplicationPolicy
     end
   end
 
+  def edit?
+    @user.has_any_role? :admin, :tech
+  end
+
   def show?
+    authorized_roles?
+  end
+
+  def update?
+    authorized_roles?
+  end
+
+  def pdf?
     authorized_roles?
   end
 
   private
 
   def authorized_roles?
-    @user.has_any_role? :admin, :tech
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.account }
   end
 
 end

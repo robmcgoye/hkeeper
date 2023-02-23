@@ -3,9 +3,16 @@
 </div>
 <div class="col text-end">
   <div class="btn-group">
-        <%= link_to statements_path, class: "btn btn-sm btn-outline-dark" do %>
-          <i class="bi bi-arrow-left-circle pe-1"></i>Back to Satements
-        <% end %>
-    </div>
+    <% if policy(:statement).edit? %>
+      <%= link_to edit_statement_path(@statement), class: "btn btn-sm btn-outline-dark" do %>
+        <i class="bi bi-pencil pe-1"></i>Update Status
+      <% end %>
+    <% end %>
+    <%= link_to pdf_statement_path(@statement, format: :pdf), class: "btn btn-sm btn-outline-dark", target: "_blank" do %>
+      <i class="bi bi-file-pdf pe-1"></i>PDF
+    <% end %>
+    <%= link_to statements_path, class: "btn btn-sm btn-outline-dark" do %>
+      <i class="bi bi-arrow-left-circle pe-1"></i>Back to Satements
+    <% end %>
   </div>
 </div>
