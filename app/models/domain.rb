@@ -11,7 +11,7 @@ class Domain < ApplicationRecord
   monetize :registration_fee_cents
   monetize :hosting_fee_cents
 
-  scope :needs_to_be_billed, -> { where('billed_on > ? OR billed_on IS ?', 1.year.ago, nil )}
+  scope :needs_to_be_billed, -> { where('billed_on > ? OR billed_on IS ?', 1.year.from_now, nil )}
 
   def annual_fee
     return registration_fee_cents + hosting_fee_cents

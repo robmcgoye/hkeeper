@@ -1,6 +1,6 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
-// @import './custom.css.scss';
+@import './custom.scss';
 // @charset "UTF-8";
 /*!
 * Start Bootstrap - Simple Sidebar v6.0.5 (https://startbootstrap.com/template/simple-sidebar)
@@ -380,6 +380,7 @@ button,
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;
+          appearance: button;
 }
 button:not(:disabled),
 [type=button]:not(:disabled),
@@ -438,6 +439,7 @@ legend + * {
 [type=search] {
   outline-offset: -2px;
   -webkit-appearance: textfield;
+          appearance: textfield;
 }
 
 /* rtl:raw:
@@ -450,6 +452,7 @@ legend + * {
 */
 ::-webkit-search-decoration {
   -webkit-appearance: none;
+          appearance: none;
 }
 
 ::-webkit-color-swatch-wrapper {
@@ -467,6 +470,7 @@ legend + * {
 ::-webkit-file-upload-button {
   font: inherit;
   -webkit-appearance: button;
+          appearance: button;
 }
 
 output {
@@ -2491,7 +2495,8 @@ textarea.form-control-lg {
      -moz-appearance: none;
           appearance: none;
   -webkit-print-color-adjust: exact;
-          color-adjust: exact;
+          print-color-adjust: exact;
+          // color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;

@@ -22,4 +22,8 @@ class Statement < ApplicationRecord
     total
   end
 
+  def due_at
+    self.invoiced_at + (self.terms).days
+  end
+
 end

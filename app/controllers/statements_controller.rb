@@ -3,7 +3,7 @@ class StatementsController < ApplicationController
   before_action :set_statement, only: %i[ show pdf edit update ]
 
   def index
-    @statements = policy_scope(Statement)
+    @pagy, @statements = pagy(policy_scope(Statement))
   end
 
   def show

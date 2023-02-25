@@ -3,7 +3,7 @@ class ComputersController < ApplicationController
   before_action :set_computer, only: [ :edit, :update, :show, :destroy ]
   
   def index
-    @computers = policy_scope(Computer)
+    @pagy, @computers = pagy(policy_scope(Computer))
   end
 
   def show

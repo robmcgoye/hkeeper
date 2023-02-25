@@ -9,9 +9,11 @@ class AccountsController < ApplicationController
       @search_all = 0
     end
     if @search_all == 0
-      @accounts = policy_scope(Account).active_clients
+
+      @pagy, @accounts = pagy(policy_scope(Account).active_clients)
     else
-      @accounts = policy_scope(Account)
+
+      @pagy, @accounts = pagy(policy_scope(Account))
     end
   end
 

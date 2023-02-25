@@ -1,7 +1,7 @@
 <table class="table table-borderless">
   <tr>
     <td>
-      <div class="card">
+      <div class="card ps-2">
         <div class="card-header">
           Invoice to:
         </div>
@@ -31,10 +31,10 @@
             <%= @statement.invoice_number %>
           </div>
           <div class="my-1">
-            <span class="fw-bold">Date:</span> <%= @statement.created_at.strftime(" %m/%d/%Y") %>
+            <span class="fw-bold">Date:</span> <%= @statement.invoiced_at.strftime(" %m/%d/%Y") %>
           </div>
           <div class="my-1">
-            <span class="fw-bold">Due Date:</span> <%= (@statement.created_at + (@statement.terms).days).strftime(" %m/%d/%Y") %>
+            <span class="fw-bold">Due Date:</span> <%= @statement.due_at.strftime(" %m/%d/%Y") %>
           </div>
           <div class="my-1">
             <span class="fw-bold">Status:</span> 

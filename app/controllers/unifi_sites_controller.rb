@@ -4,7 +4,8 @@ class UnifiSitesController < ApplicationController
   before_action :set_unifi_site, only: %i[ show edit update destroy ]
 
   def index
-    @unifi_sites = policy_scope(UnifiSite)
+    @pagy, @unifi_sites = pagy(policy_scope(UnifiSite))
+    # @unifi_sites = policy_scope(UnifiSite)
   end
 
   def new

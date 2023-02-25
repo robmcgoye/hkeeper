@@ -4,7 +4,7 @@ class DomainsController < ApplicationController
   before_action :set_domain, only: %i[ show edit update destroy ]
 
   def index
-    @domains = policy_scope(Domain)
+    @pagy, @domains = pagy(policy_scope(Domain))
   end
 
   def show

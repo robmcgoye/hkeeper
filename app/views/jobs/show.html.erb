@@ -63,25 +63,25 @@
         </div>
       </div>
     </div>
-      <table class="table table-sm table-striped">
-        <thead class="table-dark">
-          <th>Date</th>
-          <th>Status</th>
-          <th>Notes</th>
-        </thead>
-        <% @events.order(:created_at).reverse_order.each do |event| %>
-          <tr>
-            <td><%= event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
-            <td><%= event.get_status %></td>
-            <td><%= event.notes %></td>
-          </tr>
-        <% end %>
-      </table>
-    <% if @pagy.pages > 1 %>
-      <div class="d-flex justify-content-center">
-        <%== render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
-      </div>
-    <% end %>
+    <table class="table table-sm table-striped">
+      <thead class="table-dark">
+        <th>Date</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </thead>
+      <% @events.order(:created_at).reverse_order.each do |event| %>
+        <tr>
+          <td><%= event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
+          <td><%= event.get_status %></td>
+          <td><%= event.notes %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+      <%#== render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
+    </div> 
 
   </div>
 </div>

@@ -5,13 +5,14 @@
 
 # Example:
 # crontab -r 
-# whenever --update-crontab --set-environment='development'
+# whenever --update-crontab --set environment='development'
 # 
 # set :output, "/path/to/my/cron_log.log"
 env :PATH, ENV['PATH']
 set :output, "./log/cron.log"
 #
-every 15.days do
+# every 15.days do
+every 2.minutes do
   runner "GenerateStatementsJob.perform_now"
   # rake "statement.generate"
 end
