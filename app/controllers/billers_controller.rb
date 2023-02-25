@@ -4,7 +4,7 @@ class BillersController < ApplicationController
   before_action :set_biller, only: %i[ edit update ]
 
   def create
-    @biller = Biller.new(biller_params)
+    @biller = @account.billers.new(biller_params)
     authorize @biller
     if @biller.save
       redirect_to accounts_path, notice: "Settings were successfully created."
