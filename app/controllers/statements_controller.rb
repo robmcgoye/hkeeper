@@ -2,8 +2,27 @@ class StatementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_statement, only: %i[ show pdf edit update ]
 
+  def filter
+    @statement_form = StatementFilterForm.new(statement_filter_params)
+    query = Statement.empty
+    if params[:statement_filter_form][:pending].to_i == 1 
+      query += (policy_scope(Statement).pending).pluck(:id)
+    end      
+    if params[:statement_filter_form][:unpaid].to_i == 1
+      query += (policy_scope(Statement).unpaid).pluck(:id)
+    end
+    if params[:statement_filter_form][:paid].to_i == 1
+      query += (policy_scope(Statement).paid).pluck(:id)
+    end        
+    if params[:statement_filter_form][:voided].to_i == 1
+      query += (policy_scope(Statement).voided).pluck(:id)
+    end
+    @pagy, @statements = pagy(Statement.where(id: query).order(invoiced_at: :desc))
+  end
+
   def index
-    @pagy, @statements = pagy(policy_scope(Statement))
+    @statement_form = StatementFilterForm.new
+    @pagy, @statements = pagy(policy_scope(Statement).unpaid)
   end
 
   def show
@@ -38,10 +57,14 @@ class StatementsController < ApplicationController
   def set_statement
     @statement = Statement.find(params[:id])
     authorize @statement
-    @biller = @statement.account.billers.first
+    @biller = @statement.service.account.billers.first
   end
 
   def statement_params
     params.require(:statement).permit(:status, :terms, :invoiced_at)
+  end
+
+  def statement_filter_params
+    params.require(:statement_filter_form).permit(:paid, :unpaid, :pending, :voided)
   end
 end

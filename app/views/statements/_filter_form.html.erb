@@ -1,0 +1,38 @@
+<%= form_with model: @statement_form, url: statements_url, :data => {:turbo => "false"} do |f| %>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-check form-switch">
+        <%= f.check_box :paid, class: "form-check-input", id: "flexSwitchCheckPaid" %>
+        <%= f.label :paid, class: "form-check-label", for: "flexSwitchCheckPaid" %>        
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-check form-switch">
+        <%= f.check_box :unpaid, class: "form-check-input", id: "flexSwitchCheckUnpaid" %>
+        <%= f.label :unpaid, class: "form-check-label", for: "flexSwitchCheckUnpaid" %>        
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-check form-switch">
+        <%= f.check_box :pending, class: "form-check-input", id: "flexSwitchCheckPending" %>
+        <%= f.label :pending, class: "form-check-label", for: "flexSwitchCheckPending" %>        
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-check form-switch">
+        <%= f.check_box :voided, class: "form-check-input", id: "flexSwitchCheckVoided" %>
+        <%= f.label :voided, class: "form-check-label", for: "flexSwitchCheckVoided" %>        
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="actions pb-1">
+        <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-filter-circle pe-1"></i>filter
+        <% end %>  
+      </div>
+    </div>
+  </div>
+
+<% end %>

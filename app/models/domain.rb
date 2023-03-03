@@ -1,6 +1,7 @@
 class Domain < ApplicationRecord
   belongs_to :account
-
+  has_many :statements, :as => :service
+  
   VALID_DOMAIN_REGEX = /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}\z/i
   validates :name, presence: true, 
                     length: { minimum: 3 },
@@ -18,10 +19,11 @@ class Domain < ApplicationRecord
   end
 
   def billed_date
-    if billed_on.nil?
+    statement = self.statements.last_billed.take
+    if statement.nil?
       "Not Billed Yet"
     else
-      billed_on.strftime(" %m/%d/%Y")
+      statement.invoiced_at.strftime(" %m/%d/%Y")
     end
   end
 end

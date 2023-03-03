@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_22_232237) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_114109) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -116,11 +116,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_22_232237) do
     t.integer "invoice_number"
     t.integer "terms"
     t.integer "status"
-    t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "invoiced_at"
-    t.index ["account_id"], name: "index_statements_on_account_id"
+    t.datetime "emailed_at"
+    t.datetime "due_at"
+    t.integer "service_id"
+    t.string "service_type"
+    t.index ["service_type", "service_id"], name: "index_statements_on_service_type_and_service_id"
   end
 
   create_table "unifi_sites", force: :cascade do |t|
@@ -162,6 +165,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_22_232237) do
   add_foreign_key "job_events", "jobs"
   add_foreign_key "jobs", "computers"
   add_foreign_key "line_items", "statements"
-  add_foreign_key "statements", "accounts"
   add_foreign_key "unifi_sites", "accounts"
 end

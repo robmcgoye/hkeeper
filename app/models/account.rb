@@ -7,7 +7,6 @@ class Account < ApplicationRecord
   has_many :computers, :dependent => :delete_all
   has_many :domains, :dependent => :delete_all
   has_many :unifi_sites, :dependent => :delete_all
-  has_many :statements, :dependent => :delete_all
   has_many :users, through: :roles, class_name: 'User', source: :users
   has_many :managers, -> { where(roles: {name: :manager}) }, through: :roles, class_name: 'User', source: :users
 

@@ -1,8 +1,16 @@
 class Statement < ApplicationRecord
-  belongs_to :account
+  belongs_to :service, :polymorphic => true
   has_many :line_items, :dependent => :delete_all
-
+  # attribute :email_user
   enum :status, { pending: 0, unpaid: 1, paid: 2, voided: 3 }, default: :pending
+
+  scope :annual_billing, -> { where('invoiced_at > ?', 1.year.ago )}
+  scope :unpaid, -> { where(status: 'unpaid').order(invoiced_at: :desc) }
+  scope :paid, -> { where(status: 'paid').order(invoiced_at: :desc) }
+  scope :pending, -> { where(status: 'pending').order(invoiced_at: :desc) }
+  scope :voided, -> { where(status: 'voided').order(invoiced_at: :desc) }
+  scope :last_billed, -> { where(status: ['paid', 'unpaid']).order(invoiced_at: :desc)}
+  scope :empty, -> { where(status: 'empty') }
 
   before_create do
     if Statement.count > 0
@@ -12,18 +20,26 @@ class Statement < ApplicationRecord
     end 
     self.invoiced_at = Date.today
     self.terms = 15
+    self.due_at = self.invoiced_at + self.terms.days
+  end
+
+  before_update do
+    self.due_at = invoiced_at + terms.days
   end
 
   def total
     total = 0
-    self.line_items.each do |item|
+    line_items.each do |item|
       total += (item.quantity * item.amount_cents)
     end
     total
   end
 
-  def due_at
-    self.invoiced_at + (self.terms).days
+  def emailed_date
+    if emailed_at.nil?
+      "Not emailed yet"
+    else
+      emailed_at.strftime(" %m/%d/%Y")
+    end
   end
-
 end

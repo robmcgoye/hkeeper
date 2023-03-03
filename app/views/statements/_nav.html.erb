@@ -1,7 +1,8 @@
 <div class="col">
   <h3>Invoice # <%= @statement.invoice_number %></h3>
+  <span class="fs-6 text-success"><b>Emailed at:</b> <%= @statement.emailed_date %></span>
 </div>
-<div class="col text-end">
+<div class="col text-end pb-2">
   <div class="btn-group">
     <% if policy(:statement).edit? %>
       <%= link_to edit_statement_path(@statement), class: "btn btn-sm btn-outline-dark" do %>

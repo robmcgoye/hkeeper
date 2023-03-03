@@ -5,7 +5,10 @@ class StatementPolicy < ApplicationPolicy
       if @user.has_any_role? :admin, :tech
         scope.all
       else
-        scope.where(account_id: (Account.with_role(:manager, @user).pluck(:id)))
+        unifi_ids = Statement.where(service_id: UnifiSite.where(account_id: (Account.with_role(:manager, @user).pluck(:id))).pluck(:id)).where(service_type: "UnifiSite").pluck(:id)
+        domain_ids = Statement.where(service_id: Domain.where(account_id: (Account.with_role(:manager, @user).pluck(:id))).pluck(:id)).where(service_type: "Domain").pluck(:id)
+          
+        scope.where(id: (domain_ids + unifi_ids))
       end
     end
   end
@@ -29,7 +32,7 @@ class StatementPolicy < ApplicationPolicy
   private
 
   def authorized_roles?
-    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.account }
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.service.account }
   end
 
 end
