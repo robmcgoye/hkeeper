@@ -15,9 +15,14 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Password Reset Instructions"
   end
     
-  # def statement(user)
-  #   @user = user
-  #   mail to: @user.email, subject: "New Statement"
-  # end
+  def new_statement(statement)
+    @user = statement.service.account.billers.take
+    mail to: @user.email, subject: "New Statement"
+  end
+
+  def overdue_statement(statement)
+    @user = statement.service.account.billers.take
+    mail to: @user.email, subject: "Overdue Statement"
+  end
 
 end

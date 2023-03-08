@@ -17,6 +17,10 @@ every 2.minutes do
   # rake "statement.generate"
 end
 
+every 2.minutes do
+  runner "EmailStatementsJob.perform_now"
+  # rake "statement.generate"
+end
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"

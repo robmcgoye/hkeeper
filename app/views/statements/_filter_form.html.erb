@@ -13,6 +13,7 @@
         <%= f.label :unpaid, class: "form-check-label", for: "flexSwitchCheckUnpaid" %>        
       </div>
     </div>
+    <% if policy(:statement).edit? %>
     <div class="col">
       <div class="form-check form-switch">
         <%= f.check_box :pending, class: "form-check-input", id: "flexSwitchCheckPending" %>
@@ -25,7 +26,7 @@
         <%= f.label :voided, class: "form-check-label", for: "flexSwitchCheckVoided" %>        
       </div>
     </div>
-
+<% end %>
     <div class="col">
       <div class="actions pb-1">
         <%= f.button class: "btn btn-sm btn-outline-dark" do %>
