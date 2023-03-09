@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  require 'resque/server'
 
   resources :domains
   resources :unifi_sites
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
     resources :jobs, except: [ :index ]
   end
   
+  mount Resque::Server.new, at: '/resque'
+
   namespace :api do
     namespace :v1 do
       defaults format: :json do

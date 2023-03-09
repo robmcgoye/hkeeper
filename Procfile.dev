@@ -1,4 +1,4 @@
 web: bin/rails server -p 3000 -b 10.50.55.90
-worker: QUEUE=* bundle exec rake environment resque:work
 js: yarn build --watch
 css: yarn build:css --watch
+worker: QUEUE=* bundle exec rake environment resque:work --trace

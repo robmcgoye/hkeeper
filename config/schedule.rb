@@ -30,7 +30,7 @@ end
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-every :reboot do
-  rake "resque:work QUEUE=*"
-end
+# every :reboot do
+#   rake "resque:work QUEUE=*"
+# end
 # Learn more: http://github.com/javan/whenever
