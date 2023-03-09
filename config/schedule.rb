@@ -14,12 +14,10 @@ set :output, "./log/cron.log"
 # every 15.days do
 every 2.minutes do
   runner "GenerateStatementsJob.perform_now"
-  # rake "statement.generate"
 end
 
 every 2.minutes do
   runner "EmailStatementsJob.perform_now"
-  # rake "statement.generate"
 end
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -30,7 +28,7 @@ end
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-# every :reboot do
-#   rake "resque:work QUEUE=*"
-# end
+every :reboot do
+  rake "resque:work QUEUE=*"
+end
 # Learn more: http://github.com/javan/whenever
