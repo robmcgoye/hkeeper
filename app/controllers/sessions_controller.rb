@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:user][:email].downcase)
     if @user
       if @user.unconfirmed?
-        redirect_to new_confirmation_path, alert: "Incorrect email or password."
+        redirect_to new_confirmation_path, alert: "Account not confirmed."
       elsif @user.authenticate(params[:user][:password])
         login @user
         redirect_to root_path, notice: "Signed in."

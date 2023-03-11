@@ -2,20 +2,19 @@
   <div class="card mb-3 shadow-lg rounded border">
     <div class="card-body text-dark">
     
-    <%= form_with url: login_path, scope: :user do |form| %>
-  <div class="field form-group">
-    <%= form.label :email %>
-    <%= form.email_field :email, required: true, class: "form-control" %>
-  </div>
-  <div class="field form-group">
-    <%= form.label :password %>
-    <%= form.password_field :password, required: true, class: "form-control" %>
-  </div>
-
-            <div class="actions pt-2">
-            <%= form.submit "Sign In", class: "btn btn-sm btn-outline-dark" %>
-          </div>
-<% end %>
+      <%= form_with url: login_path, scope: :user do |form| %>
+        <div class="field form-group">
+          <%= form.label :email %>
+          <%= form.email_field :email, required: true, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= form.label :password %>
+          <%= form.password_field :password, required: true, class: "form-control" %>
+        </div>
+        <div class="actions pt-2">
+          <%= form.submit "Sign In", class: "btn btn-sm btn-outline-dark" %>
+        </div>
+      <% end %>
 
     </div>
   </div>

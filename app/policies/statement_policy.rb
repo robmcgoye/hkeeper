@@ -5,10 +5,7 @@ class StatementPolicy < ApplicationPolicy
       if @user.has_any_role? :admin, :tech
         scope.all
       else
-        unifi_ids = Statement.where(service_id: UnifiSite.where(account_id: (Account.with_role(:manager, @user).pluck(:id))).pluck(:id)).where(service_type: "UnifiSite").pluck(:id)
-        domain_ids = Statement.where(service_id: Domain.where(account_id: (Account.with_role(:manager, @user).pluck(:id))).pluck(:id)).where(service_type: "Domain").pluck(:id)
-          
-        scope.where(id: (domain_ids + unifi_ids))
+        scope.statements_in_account(Account.with_role(:manager, @user).pluck(:id))          
       end
     end
   end

@@ -11,6 +11,8 @@ class Statement < ApplicationRecord
   scope :voided, -> { where(status: 'voided').order(invoiced_at: :desc) }
   scope :last_billed, -> { where(status: ['paid', 'unpaid']).order(invoiced_at: :desc)}
   scope :empty, -> { where(status: 'empty') }
+  scope :unifi_ids, -> (unifisite_ids) { where(service_id: unifisite_ids).where(service_type: "UnifiSite").pluck(:id) }
+  scope :domain_ids, -> (domain_ids) { where(service_id: domain_ids).where(service_type: "Domain").pluck(:id) }
 
   before_create do
     if Statement.count > 0
@@ -25,6 +27,12 @@ class Statement < ApplicationRecord
 
   before_update do
     self.due_at = invoiced_at + terms.days
+  end
+
+  def self.statements_in_account(account_id)
+    unifi_ids = self.unifi_ids(UnifiSite.find_by_account_ids(account_id))
+    domain_ids = self.domain_ids(Domain.find_by_account_ids(account_id))
+    self.where(id: (domain_ids + unifi_ids))
   end
 
   def total

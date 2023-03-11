@@ -17,7 +17,11 @@ class StatementsController < ApplicationController
     if params[:statement_filter_form][:voided].to_i == 1
       query += (policy_scope(Statement).voided).pluck(:id)
     end
-    @pagy, @statements = pagy(Statement.where(id: query).order(invoiced_at: :desc))
+    if params[:statement_filter_form][:account_id].to_i > 0
+      @pagy, @statements = pagy((Statement.where(id: query)).statements_in_account(params[:statement_filter_form][:account_id].to_i).order(invoiced_at: :desc))
+    else
+      @pagy, @statements = pagy(Statement.where(id: query).order(invoiced_at: :desc))  
+    end
   end
 
   def index
@@ -65,6 +69,6 @@ class StatementsController < ApplicationController
   end
 
   def statement_filter_params
-    params.require(:statement_filter_form).permit(:paid, :unpaid, :pending, :voided)
+    params.require(:statement_filter_form).permit(:paid, :unpaid, :pending, :voided, :account_id)
   end
 end

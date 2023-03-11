@@ -4,7 +4,7 @@ class StatementFilterForm
   extend ActiveModel::Translation
   extend ActiveModel::Naming
 
-  attr_accessor :paid, :unpaid, :pending, :voided
+  attr_accessor :paid, :unpaid, :pending, :voided, :account_id
 
   def initialize(attributes = {})
     # @errors = ActiveModel::Errors.new(self)

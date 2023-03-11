@@ -5,6 +5,8 @@ class UnifiSite < ApplicationRecord
   monetize :hosting_fee_cents
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :account_id
+  
+  scope :find_by_account_ids, -> (account_ids) { where(account_id: account_ids).pluck(:id) }
 
   def billed_date
     statement = self.statements.last_billed.take
