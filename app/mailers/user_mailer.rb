@@ -17,11 +17,16 @@ class UserMailer < ApplicationMailer
     
   def new_statement(statement)
     @user = statement.service.account.billers.take
+    @statement = statement
+    # attachments["statement_#{statement.id}.pdf"] = WickedPdf.new.pdf_from_string(
+    #   render_to_string(template: 'statements/pdf.html.erb', layout: 'layouts/pdf.html.erb', pdf: 'filename')
+    # )
     mail to: @user.email, subject: "New Statement"
   end
 
   def overdue_statement(statement)
     @user = statement.service.account.billers.take
+    @statement = statement
     mail to: @user.email, subject: "Overdue Statement"
   end
 
