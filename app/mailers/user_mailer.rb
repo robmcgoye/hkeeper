@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Overdue Statement"
   end
 
-  def job_error(job_event_id)
+  def job_alert(job_event_id)
     @user =  User.with_role(:admin).take
     @job_event = JobEvent.find(job_event_id)
     mail to: @user.email, subject: "Error with computer #{ @job_event.job.computer.name }"

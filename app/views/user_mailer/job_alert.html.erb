@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <td>Account:</td>
+    <td><%= @job_event.job.computer.account.name %></td>
+  </tr>
+  <tr>
+    <td>Computer: </td>
+    <td> <%= @job_event.job.computer.name %> </td>
+  </tr>
+  <tr>
+    <td>Job: </td>
+    <td> <%= @job_event.job.action %> </td>
+  </tr>
+  <tr>
+    <td>Job Status: </td>
+    <td> <%= @job_event.status %> </td>
+  </tr>
+  <tr>
+    <td>Note: </td>
+    <td><%= @job_event.notes %> </td>
+  </tr>  
+</table>
