@@ -16,6 +16,8 @@ class Job < ApplicationRecord
           update_computer: 'Update Computer' }, default: :update_computer
   
   scope :que, ->(today) { where("status <> 2 AND execute_after < ?", today) }
+  scope :active_jobs, -> { where("status <> 2 ") }
+
 
   def get_action
     Job.actions[action]

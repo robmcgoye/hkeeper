@@ -17,7 +17,7 @@
       <table class="table table-sm table-striped">
         <thead class="table-secondary">
           <th>Name</th>
-          <th>API Key</th>
+          <%# <th>API Key</th> %>
           <th>
             <%= link_to accounts_url({all: "#{@search_all == 1 ? '0' : '1'}"}), class: "btn btn-sm btn-outline-dark" do %>
               <i class="bi bi-toggle-<%= "#{@search_all == 1 ? 'on' : 'off'}" %> pe-2"></i>All
@@ -28,7 +28,7 @@
           <% @accounts.each do |account| %>
             <tr <%= "#{!account.active? ? " class=table-warning" : ""}" %> >
               <td><%= account.name %></td>
-              <td><%= account.private_api_key %></td>
+              <%# <td><%= account.private_api_key %</td> %>
               <% if policy(:account_role).index? || policy(:account).edit? || policy(:account).destroy? %>
               <td>
                 <div class="btn-group">
@@ -49,9 +49,18 @@
                       <% path = edit_account_biller_path(account, account.billers.first) %>
                     <% end %>
                     <%= link_to path, class: "btn btn-sm btn-outline-dark" do %>
-                      <i class="bi bi-gear pe-1"></i>Settings
+                      <i class="bi bi-gear pe-1"></i>Billing 
                     <% end %>
                   <% end %>
+                    <% if account.computer_billing.nil? %>
+                      <% path = new_account_computer_billing_path(account) %>
+                    <% else %>
+                      <% path = edit_account_computer_billing_path(account, account.computer_billing) %>
+                    <% end %>
+                    <%= link_to path, class: "btn btn-sm btn-outline-dark" do %>
+                      <i class="bi bi-gear pe-1"></i>Computer Billing 
+                    <% end %>
+
                   <% if policy(:account_role).index? %>
                     <%= link_to account_roles_path(account), class: "btn btn-sm btn-outline-dark" do %>
                       <i class="bi bi-people pe-1"></i>Users

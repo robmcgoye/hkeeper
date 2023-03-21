@@ -12,6 +12,15 @@ class GenerateStatementsJob < ApplicationJob
 
   private
 
+  def computer_invoices(account)
+    computers = account.computers
+    if computers.count > 0
+      computers.each do |computer|
+        
+      end
+    end
+  end 
+
   def unifi_invoices(account)
     unifi_sites = account.unifi_sites
     if unifi_sites.count > 0

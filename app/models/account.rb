@@ -5,6 +5,7 @@ class Account < ApplicationRecord
   
   has_many :billers, :dependent => :delete_all
   has_many :computers, :dependent => :delete_all
+  has_one :computer_billing, :dependent => :delete
   has_many :domains, :dependent => :delete_all
   has_many :unifi_sites, :dependent => :delete_all
   has_many :users, through: :roles, class_name: 'User', source: :users
@@ -13,7 +14,7 @@ class Account < ApplicationRecord
   before_create :set_private_api_key
   validates :private_api_key, uniqueness: true, allow_blank: true
   validates :name, uniqueness: { case_sensitive: false }, presence: true
-
+  
   scope :active_clients, -> { where(active: true) }
 
   private

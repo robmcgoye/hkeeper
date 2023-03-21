@@ -4,20 +4,20 @@
   </div>
   <div class="list-group list-group-flush">
 
-    <%= link_to "Dashboard", dashboard_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+    <%= link_to "Dashboard", dashboard_path, class: "#{"active " unless request.path != dashboard_path}list-group-item list-group-item-action list-group-item-light p-3" %>
 
-    <%= link_to "Accounts", accounts_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+    <%= link_to "Accounts", accounts_path, class: "#{"active " unless !request.path.start_with?("/accounts")}list-group-item list-group-item-action list-group-item-light p-3" %>
     
-    <%= link_to "Computers", computers_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
-    
-    <%= link_to "Domains", domains_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+    <%= link_to "Computers", computers_path, class: "#{"active " unless !request.path.start_with?("/computers")}list-group-item list-group-item-action list-group-item-light p-3" %>
 
-    <%= link_to "Unifi Sites", unifi_sites_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+    <%= link_to "Domains", domains_path, class: "#{"active " unless !request.path.start_with?("/domains")}list-group-item list-group-item-action list-group-item-light p-3" %>
+
+    <%= link_to "Unifi Sites", unifi_sites_path, class: "#{"active " unless !request.path.start_with?("/unifi_sites")}list-group-item list-group-item-action list-group-item-light p-3" %>
     
-    <%= link_to "Statements", statements_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+    <%= link_to "Statements", statements_path, class: "#{"active " unless !request.path.start_with?("/statements")}list-group-item list-group-item-action list-group-item-light p-3" %>
 
     <% if policy(:user_role).index? %>
-      <%= link_to "Users", users_path, class: "list-group-item list-group-item-action list-group-item-light p-3" %>
+      <%= link_to "Users", users_path, class: "#{"active " unless request.path != users_path}list-group-item list-group-item-action list-group-item-light p-3" %>
     <% end %>
   </div>
 </div>

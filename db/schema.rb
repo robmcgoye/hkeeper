@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_114109) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_141839) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -32,6 +32,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_114109) do
     t.index ["account_id"], name: "index_billers_on_account_id"
   end
 
+  create_table "computer_billings", force: :cascade do |t|
+    t.integer "cost_per_job_cents", default: 0, null: false
+    t.string "cost_per_job_currency", default: "USD", null: false
+    t.datetime "billed_on"
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_computer_billings_on_account_id"
+  end
+
   create_table "computers", force: :cascade do |t|
     t.string "name"
     t.string "cpu"
@@ -47,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_114109) do
     t.string "mb_serial_number"
     t.text "notes"
     t.datetime "last_contacted_at"
+    t.datetime "bios_released_on"
     t.index ["account_id"], name: "index_computers_on_account_id"
     t.index ["key"], name: "index_computers_on_key"
   end
@@ -160,6 +171,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_114109) do
   end
 
   add_foreign_key "billers", "accounts"
+  add_foreign_key "computer_billings", "accounts"
   add_foreign_key "computers", "accounts"
   add_foreign_key "domains", "accounts"
   add_foreign_key "job_events", "jobs"

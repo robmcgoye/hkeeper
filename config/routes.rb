@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   require 'resque/server'
+  mount Resque::Server.new, at: '/resque'
 
   resources :domains
   resources :unifi_sites
   resources :statements, except: [:create, :new, :destroy]
   post "statements", to: "statements#filter"
+  post "computers", to: "computers#filter"
   get "statements/:id/invoice", to: "statements#pdf", as: "pdf_statement"
   resources :accounts, except: [:show] do
     resources :billers, only: [:create, :new, :edit, :update]
+    # post "computer_billings", to: "billers#create_computer_billing", as: "computer_billings"
+    # patch "computer_billings/:id", to: "billers#update_computer_billing", as: "computer_billing"
+    resources :computer_billings, only: [:create, :new, :edit, :update]
     resources :api_keys, only: :update
     # resources :roles, except: [:show]
     get "roles/new", to: "roles#new"
@@ -20,8 +25,6 @@ Rails.application.routes.draw do
     resources :jobs, except: [ :index ]
   end
   
-  mount Resque::Server.new, at: '/resque'
-
   namespace :api do
     namespace :v1 do
       defaults format: :json do

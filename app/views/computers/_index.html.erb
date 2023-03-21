@@ -1,0 +1,52 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+      <div class="row">
+        <div class="col">
+          <h3>Computers</h3>
+        </div>
+        <div class="col text-end">
+          <%= link_to "/client_app/install_hkeeper.zip", class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-cloud-arrow-down pe-1"></i>Download Computer Client
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <%= render "filter_form" %>
+      </div>
+      <table class="table table-sm table-striped">
+
+        <thead class="table-secondary">
+          <th>Account</th>
+          <th>Computer Name</th>
+          <th class="text-center"># of Jobs</th>
+          <th></th>
+        </thead>
+
+        <% @computers.each do |computer| %>
+          <tr>
+            <td class="ps-1"><%= computer.account.name %></td>
+            <td class="ps-1"><%= computer.name %></td>
+            <td class="text-center"><%= computer.jobs.count %></td>
+            <td>
+              <div class="btn-group">
+                <%= link_to computer_path(computer), class: "btn btn-sm btn-outline-dark" do %>
+                  <i class="bi bi-folder-symlink pe-1"></i>View
+                <% end %>
+
+                <% if policy(:computer).destroy? %>
+                  <%= button_to computer_path(computer), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+                    <i class="bi bi-trash pe-1"></i>Delete
+                  <% end %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+      </div> 
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<%= form_with model: @computer_form, url: computers_url, :data => {:turbo => "false"} do |f| %>
+
+  <div class="row d-flex align-items-center">
+
+      <div class="col-auto">
+        <div class="field form-group">
+          <%= f.select :account_id, account_options(selected: @computer_form.account_id), {}, {class: 'form-select'} %>
+        </div>
+      </div>
+
+    <div class="col">
+      <div class="actions pb-1">
+        <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-filter-circle pe-1"></i>filter
+        <% end %>  
+      </div>
+    </div>
+  </div>
+
+<% end %>

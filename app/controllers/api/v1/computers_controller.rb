@@ -5,6 +5,8 @@ class Api::V1::ComputersController < Api::V1::BaseController
   def show_by_key
     @computer = Computer.find_by key: params[:key]
     authorize_computer
+    @computer.last_contacted_at = Date.today
+    @computer.save
   end
 
   def show
@@ -35,7 +37,7 @@ class Api::V1::ComputersController < Api::V1::BaseController
 
     def computer_params
       params.require(:computer).permit(:name, :model, :manufacturer, 
-          :operating_system, :cpu, :serial_number, :mb_serial_number, :key)
+          :operating_system, :cpu, :serial_number, :mb_serial_number, :key, :bios_released_on)
     end
 
     def authorize_computer
