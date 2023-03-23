@@ -7,16 +7,45 @@ class GenerateStatementsJob < ApplicationJob
       # puts "Checking acct #{account.name}"
       domain_invoices(account)
       unifi_invoices(account)
+      computer_invoices(account)
     end
   end
 
   private
 
   def computer_invoices(account)
+    puts "Checking computers..."
     computers = account.computers
+    line_items = Array.new
     if computers.count > 0
       computers.each do |computer|
-        
+
+        puts "Checking #{computer.name}..."
+    
+        if !computer.last_contacted_at.nil?
+
+          puts "#{computer.name} is actively checking in #{computer.last_contacted_at}"
+          
+          if computer.last_contacted_at > (Date.today - 1.month)
+            if account.computer_billing.statements.monthly_billing.empty?
+              job_count = computer.jobs.active_jobs.count
+              if job_count > 0
+                item = LineItem.new
+                item.quantity = job_count
+                item.description = "Monthly fee for jobs on #{computer.name}"
+                item.amount_cents = account.computer_billing.cost_per_job_cents
+                line_items.push(item)
+              end
+            end
+          end
+        end
+      end
+      if line_items.count > 0
+        statement = account.computer_billing.statements.new
+        line_items.each do |item|
+          statement.line_items << item
+        end
+        statement.save
       end
     end
   end 

@@ -5,6 +5,7 @@ class Statement < ApplicationRecord
   enum :status, { pending: 0, unpaid: 1, paid: 2, voided: 3 }, default: :pending
 
   scope :annual_billing, -> { where('invoiced_at > ?', 1.year.ago )}
+  scope :monthly_billing, -> { where('invoiced_at > ?', 1.month.ago )}
   scope :unpaid, -> { where(status: 'unpaid').order(invoiced_at: :desc) }
   scope :paid, -> { where(status: 'paid').order(invoiced_at: :desc) }
   scope :pending, -> { where(status: 'pending').order(invoiced_at: :desc) }
