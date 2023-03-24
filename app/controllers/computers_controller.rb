@@ -3,9 +3,8 @@ class ComputersController < ApplicationController
   before_action :set_computer, only: [ :edit, :update, :show, :destroy ]
   
   def filter
+    set_filter(:computer_filter, {"account_id" => params[:computer_filter_form][:account_id]})
     @computer_form = ComputerFilterForm.new(computer_filter_params)
-    @pagy, @computers = pagy(policy_scope(Computer))
-
     if params[:computer_filter_form][:account_id].to_i > 0
       @pagy, @computers = pagy(policy_scope(Computer).computers_in_account(params[:computer_filter_form][:account_id].to_i))
     else
@@ -14,8 +13,14 @@ class ComputersController < ApplicationController
   end 
   
   def index
-    @computer_form = ComputerFilterForm.new
-    @pagy, @computers = pagy(policy_scope(Computer))
+    computer_filter = get_filter(:computer_filter)
+    if computer_filter.nil? || computer_filter["account_id"].to_i == 0
+      @computer_form = ComputerFilterForm.new
+      @pagy, @computers = pagy(policy_scope(Computer))
+    else
+      @computer_form = ComputerFilterForm.new(computer_filter)
+      @pagy, @computers = pagy(policy_scope(Computer).computers_in_account(computer_filter["account_id"].to_i))
+    end
   end
 
   def show

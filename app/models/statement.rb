@@ -51,4 +51,5 @@ class Statement < ApplicationRecord
       emailed_at.strftime(" %m/%d/%Y")
     end
   end
+
 end

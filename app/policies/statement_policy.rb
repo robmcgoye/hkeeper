@@ -5,7 +5,7 @@ class StatementPolicy < ApplicationPolicy
       if @user.has_any_role? :admin, :tech
         scope.all
       else
-        scope.statements_in_account(Account.with_role(:manager, @user).pluck(:id))          
+        scope.statements_in_account(Account.with_role(:manager, @user).pluck(:id))         
       end
     end
   end

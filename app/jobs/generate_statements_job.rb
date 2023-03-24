@@ -14,18 +14,11 @@ class GenerateStatementsJob < ApplicationJob
   private
 
   def computer_invoices(account)
-    puts "Checking computers..."
     computers = account.computers
-    line_items = Array.new
     if computers.count > 0
+      line_items = Array.new
       computers.each do |computer|
-
-        puts "Checking #{computer.name}..."
-    
         if !computer.last_contacted_at.nil?
-
-          puts "#{computer.name} is actively checking in #{computer.last_contacted_at}"
-          
           if computer.last_contacted_at > (Date.today - 1.month)
             if account.computer_billing.statements.monthly_billing.empty?
               job_count = computer.jobs.active_jobs.count
@@ -40,6 +33,7 @@ class GenerateStatementsJob < ApplicationJob
           end
         end
       end
+      
       if line_items.count > 0
         statement = account.computer_billing.statements.new
         line_items.each do |item|

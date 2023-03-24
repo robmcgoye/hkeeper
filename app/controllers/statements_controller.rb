@@ -3,30 +3,20 @@ class StatementsController < ApplicationController
   before_action :set_statement, only: %i[ show pdf edit update ]
 
   def filter
+    set_filter(:statement_filter, build_filter_params)
     @statement_form = StatementFilterForm.new(statement_filter_params)
-    query = Statement.empty
-    if params[:statement_filter_form][:pending].to_i == 1 
-      query += (policy_scope(Statement).pending).pluck(:id)
-    end      
-    if params[:statement_filter_form][:unpaid].to_i == 1
-      query += (policy_scope(Statement).unpaid).pluck(:id)
-    end
-    if params[:statement_filter_form][:paid].to_i == 1
-      query += (policy_scope(Statement).paid).pluck(:id)
-    end        
-    if params[:statement_filter_form][:voided].to_i == 1
-      query += (policy_scope(Statement).voided).pluck(:id)
-    end
-    if params[:statement_filter_form][:account_id].to_i > 0
-      @pagy, @statements = pagy((Statement.where(id: query)).statements_in_account(params[:statement_filter_form][:account_id].to_i).order(invoiced_at: :desc))
-    else
-      @pagy, @statements = pagy(Statement.where(id: query).order(invoiced_at: :desc))  
-    end
+    @pagy, @statements = pagy(@statement_form.filter(policy_scope(Statement)))
   end
 
   def index
-    @statement_form = StatementFilterForm.new
-    @pagy, @statements = pagy(policy_scope(Statement).unpaid)
+    statement_filter = get_filter(:statement_filter)
+    if statement_filter.nil?
+      @statement_form = StatementFilterForm.new
+      @pagy, @statements = pagy(policy_scope(Statement).unpaid)
+    else
+      @statement_form = StatementFilterForm.new(statement_filter)
+      @pagy, @statements = pagy(@statement_form.filter(policy_scope(Statement)))
+    end
   end
 
   def show
@@ -70,5 +60,15 @@ class StatementsController < ApplicationController
 
   def statement_filter_params
     params.require(:statement_filter_form).permit(:paid, :unpaid, :pending, :voided, :account_id)
+  end
+
+  def build_filter_params
+    {
+      "pending" => params[:statement_filter_form][:pending],
+      "unpaid" => params[:statement_filter_form][:unpaid],
+      "paid" => params[:statement_filter_form][:paid],
+      "voided" => params[:statement_filter_form][:voided],
+      "account_id" => params[:statement_filter_form][:account_id]
+    }
   end
 end

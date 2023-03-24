@@ -21,7 +21,6 @@ class JobEvent < ApplicationRecord
 
   def send_alert
     UserMailer.job_alert(id).deliver_later
-    # EventAlertJob.perform_later(id)
   end
 
 end
