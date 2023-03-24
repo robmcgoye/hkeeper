@@ -25,7 +25,7 @@ class GenerateStatementsJob < ApplicationJob
               if job_count > 0
                 item = LineItem.new
                 item.quantity = job_count
-                item.description = "Monthly fee for jobs on #{computer.name}"
+                item.description = "Monthly fee for jobs on #{computer.name} with description #{computer.description}"
                 item.amount_cents = account.computer_billing.cost_per_job_cents
                 line_items.push(item)
               end

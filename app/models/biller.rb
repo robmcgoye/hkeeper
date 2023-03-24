@@ -5,6 +5,7 @@ class Biller < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates :zip, presence: true
+  validates :name, presence: true
 
   def email
     User.find(self.user_id).email

@@ -42,6 +42,6 @@ class BillersController < ApplicationController
 
   def biller_params
     params.require(:biller).permit(:account_id, :address_line_1, :address_line_2, :city, :state, :zip,
-       :user_id)
+       :user_id, :name)
   end
 end

@@ -17,5 +17,13 @@ class ComputerFilterForm
   def persisted?
     false
   end
-                  
+     
+  def filter(computer)
+    if self.account_id.to_i > 0
+      computer.computers_in_account(self.account_id.to_i)
+    else
+      computer
+    end
+  end
+
 end

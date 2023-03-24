@@ -3,6 +3,10 @@
   <%= render 'shared/error_messages', resource: biller %>
 
   <div class="field form-group pb-1">
+    <%= f.label "Name" %><br />
+    <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+  </div>
+  <div class="field form-group pb-1">
     <%= f.label "Address 1" %><br />
     <%= f.text_field :address_line_1, placeholder: "Address 1", class: "form-control" %>
   </div>

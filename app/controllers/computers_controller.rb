@@ -5,27 +5,21 @@ class ComputersController < ApplicationController
   def filter
     set_filter(:computer_filter, {"account_id" => params[:computer_filter_form][:account_id]})
     @computer_form = ComputerFilterForm.new(computer_filter_params)
-    if params[:computer_filter_form][:account_id].to_i > 0
-      @pagy, @computers = pagy(policy_scope(Computer).computers_in_account(params[:computer_filter_form][:account_id].to_i))
-    else
-      @pagy, @computers = pagy(policy_scope(Computer))
-    end    
+    @pagy, @computers = pagy(@computer_form.filter(policy_scope(Computer)))  
   end 
   
   def index
     computer_filter = get_filter(:computer_filter)
-    if computer_filter.nil? || computer_filter["account_id"].to_i == 0
+    if computer_filter.nil?
       @computer_form = ComputerFilterForm.new
-      @pagy, @computers = pagy(policy_scope(Computer))
     else
       @computer_form = ComputerFilterForm.new(computer_filter)
-      @pagy, @computers = pagy(policy_scope(Computer).computers_in_account(computer_filter["account_id"].to_i))
     end
+    @pagy, @computers = pagy(@computer_form.filter(policy_scope(Computer)))
   end
 
   def show
     @pagy, @jobs = pagy(@computer.jobs)
-    # @pagy, @jobs = pagy(@computer.jobs, page: 2)
   end
 
   def edit
@@ -53,7 +47,7 @@ class ComputersController < ApplicationController
   end
 
   def computer_params
-    params.require(:computer).permit(:notes)
+    params.require(:computer).permit(:notes, :description)
   end
 
   def computer_filter_params

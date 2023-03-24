@@ -79,7 +79,16 @@
               <%= @computer.key %>
             </div>
           </div>
+
         </div>
+          <div class="row">
+            <div class="col-auto text-primary">
+              Description : 
+            </div>
+            <div class="col">
+              <%= @computer.description %>
+            </div>
+          </div>
       </div>
       <% if policy(:computer).edit? %>
         <div class="card pt-2">
@@ -88,7 +97,7 @@
             <p class="card-text" style="white-space: pre-wrap;"><%= @computer.notes %></p>
             <div class="btn-group pt-1 ps-1">
               <%= link_to edit_computer_path(@computer), class: "btn btn-sm btn-outline-dark" do %>
-                <i class="bi bi-pencil-square pe-1"></i>Edit Notes
+                <i class="bi bi-pencil-square pe-1"></i>Edit
               <% end %>
             </div>
           </div>
