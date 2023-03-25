@@ -14,6 +14,7 @@ class Domain < ApplicationRecord
 
   # scope :needs_to_be_billed, -> { where('billed_on > ? OR billed_on IS ?', 1.year.from_now, nil )}
   scope :find_by_account_ids, -> (account_ids) { where(account_id: account_ids).pluck(:id) }
+  scope :domains_in_account, -> (account_ids) { where(account_id: account_ids) }
 
   def annual_fee
     return registration_fee_cents + hosting_fee_cents

@@ -3,8 +3,20 @@ class DomainsController < ApplicationController
   before_action :set_accounts, except: %i[ index destroy show ]
   before_action :set_domain, only: %i[ show edit update destroy ]
 
+  def filter
+    set_filter(:domain_filter, {"account_id" => params[:domain_filter_form][:account_id]})
+    @domain_form = DomainFilterForm.new(domain_filter_params)
+    @pagy, @domains = pagy(@domain_form.filter(policy_scope(Domain)))  
+  end 
+
   def index
-    @pagy, @domains = pagy(policy_scope(Domain))
+    domain_filter = get_filter(:domain_filter)
+    if domain_filter.nil?
+      @domain_form = DomainFilterForm.new
+    else
+      @domain_form = DomainFilterForm.new(domain_filter)
+    end
+    @pagy, @domains = pagy(@domain_form.filter(policy_scope(Domain)))
   end
 
   def show
@@ -68,5 +80,9 @@ class DomainsController < ApplicationController
     def domain_params
       params.require(:domain).permit(:account_id, :name, :expires_on, :notes, :web_hosting, :email_hosting,
          :registration, :registration_fee, :hosting_fee)
+    end
+
+    def domain_filter_params
+      params.require(:domain_filter_form).permit(:account_id)
     end
 end

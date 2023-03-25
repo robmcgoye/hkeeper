@@ -16,6 +16,7 @@ class Account < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }, presence: true
   
   scope :active_clients, -> { where(active: true) }
+  scope :api_key, -> (token) { active_clients.where(private_api_key: token).take }
 
   private
 

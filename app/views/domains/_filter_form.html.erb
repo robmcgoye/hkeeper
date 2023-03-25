@@ -1,10 +1,10 @@
-<%= form_with model: @computer_form, url: computers_filter_url, :data => {:turbo => "false"} do |f| %>
+<%= form_with model: @domain_form, url: domains_filter_url, :data => {:turbo => "false"} do |f| %>
 
   <div class="row d-flex align-items-center">
 
       <div class="col-auto">
         <div class="field form-group">
-          <%= f.select :account_id, account_options(selected: @computer_form.account_id), {}, {class: 'form-select'} %>
+          <%= f.select :account_id, account_options(selected: @domain_form.account_id), {}, {class: 'form-select'} %>
         </div>
       </div>
 

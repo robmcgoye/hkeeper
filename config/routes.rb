@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   resources :domains
   resources :unifi_sites
   resources :statements, except: [:create, :new, :destroy]
-  post "statements", to: "statements#filter"
-  post "computers", to: "computers#filter"
+  post "statements_filter", to: "statements#filter"
+  post "computers_filter", to: "computers#filter"
+  post "domains_filter", to: "domains#filter"
+  post "unifi_sites_filter", to: "unifi_sites#filter"
   get "statements/:id/invoice", to: "statements#pdf", as: "pdf_statement"
   resources :accounts, except: [:show] do
     resources :billers, only: [:create, :new, :edit, :update]

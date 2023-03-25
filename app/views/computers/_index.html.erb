@@ -19,6 +19,7 @@
         <thead class="table-secondary">
           <th>Account</th>
           <th>Computer Name</th>
+          <th>Description</th>
           <th class="text-center"># of Jobs</th>
           <th></th>
         </thead>
@@ -27,6 +28,7 @@
           <tr>
             <td class="ps-1"><%= computer.account.name %></td>
             <td class="ps-1"><%= computer.name %></td>
+            <td class="ps-1"><%= computer.description %></td>
             <td class="text-center"><%= computer.jobs.count %></td>
             <td>
               <div class="btn-group">

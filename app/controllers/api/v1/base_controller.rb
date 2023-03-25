@@ -11,7 +11,7 @@ class Api::V1::BaseController < ApplicationController
 
     def authenticate_with_token
       authenticate_with_http_token do |token, options|
-        @account = Account.find_by(private_api_key: token)
+        @account = Account.api_key(token)
       end
     end
 
