@@ -1,5 +1,5 @@
 set :rbenv_type, :user
-set :rbenv_ruby, '3.1.2'
+set :rbenv_ruby, '3.1.4'
 # Load DSL and set up stages
 require "capistrano/setup"
 
