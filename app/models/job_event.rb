@@ -3,7 +3,7 @@ class JobEvent < ApplicationRecord
 
   enum :status, { je_info: 0, je_warning: 1, je_error: 2 }, default: :je_info
   
-  after_save :send_alert, unless: Proc.new { status == "je_info" }
+  after_save :send_alert, unless: Proc.new { status != "je_error" }
 
   def get_status
     if status == "je_info"

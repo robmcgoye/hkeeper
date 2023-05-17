@@ -3,28 +3,32 @@
     <div class="card-body text-dark">
       <ul class="list-group list-group-horizontal-sm pb-2">
         <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= "1" %></span>
+          <span class="badge bg-primary rounded-pill"><%= @dashboard.account_count %></span>
           Accounts
         </li>
         <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= "20" %></span>
+          <span class="badge bg-primary rounded-pill"><%= @dashboard.computer_count %></span>
           Computers
         </li>
         <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= "3" %></span>
+          <span class="badge bg-primary rounded-pill"><%= @dashboard.domain_count %></span>
           Domains
         </li>
         <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= "1" %></span>
+          <span class="badge bg-primary rounded-pill"><%= @dashboard.unifi_site_count %></span>
           Unifi Sites
         </li>      </ul>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       <div class="col d-flex align-items-start">
         <i class="bi bi-arrow-right-circle pe-1"></i>
         <div>
-          <h5 class="fw-bold mb-0">Computers not communicating</h5>
+          <% computers_not_contacted = @dashboard.computers_not_contacted(30) %>
+          <h5 class="fw-bold mb-0">Computers not communicating in the last 30 days</h5>
           <p>
-            Testing layout
+            <% computers_not_contacted.each do |computer| %>
+              <%= "#{computer.account.name} #{computer.name} " %>
+              <br>
+            <% end %>
           </p>
         </div>
       </div>

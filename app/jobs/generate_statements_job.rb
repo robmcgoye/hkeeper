@@ -20,7 +20,7 @@ class GenerateStatementsJob < ApplicationJob
       computers.each do |computer|
         if !computer.last_contacted_at.nil?
           if computer.last_contacted_at > (Date.today - 1.month)
-            if account.computer_billing.statements.monthly_billing.empty?
+            if not(account.computer_billing.nil?) && (account.computer_billing.statements.monthly_billing.empty?)
               job_count = computer.jobs.active_jobs.count
               if job_count > 0
                 item = LineItem.new
