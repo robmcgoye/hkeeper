@@ -3,11 +3,11 @@ class Account < ApplicationRecord
   # encrypts :private_api_key, deterministic: false
   resourcify
   
-  has_many :billers, :dependent => :delete_all
-  has_many :computers, :dependent => :delete_all
-  has_one :computer_billing, :dependent => :delete
-  has_many :domains, :dependent => :delete_all
-  has_many :unifi_sites, :dependent => :delete_all
+  has_many :billers, dependent: :destroy
+  has_many :computers, dependent: :destroy
+  has_one :computer_billing, dependent: :destroy
+  has_many :domains, dependent: :destroy
+  has_many :unifi_sites, dependent: :destroy
   has_many :users, through: :roles, class_name: 'User', source: :users
   has_many :managers, -> { where(roles: {name: :manager}) }, through: :roles, class_name: 'User', source: :users
 

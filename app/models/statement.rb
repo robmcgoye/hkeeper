@@ -1,6 +1,6 @@
 class Statement < ApplicationRecord
   belongs_to :service, :polymorphic => true
-  has_many :line_items, :dependent => :delete_all
+  has_many :line_items, dependent: :destroy
   # attribute :email_user
   enum :status, { pending: 0, unpaid: 1, paid: 2, voided: 3 }, default: :pending
 

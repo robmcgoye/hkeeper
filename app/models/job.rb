@@ -1,7 +1,7 @@
 class Job < ApplicationRecord
   belongs_to :computer
   has_many :job_events, dependent: :destroy
-
+  
   validates :action, presence: true, 
                       length: { minimum: 2, maximum: 25 }, 
                       uniqueness: { scope: :computer_id }

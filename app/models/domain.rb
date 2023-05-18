@@ -1,6 +1,6 @@
 class Domain < ApplicationRecord
   belongs_to :account
-  has_many :statements, :as => :service
+  has_many :statements, :as => :service, dependent: :destroy
   
   VALID_DOMAIN_REGEX = /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}\z/i
   validates :name, presence: true, 

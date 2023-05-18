@@ -1,6 +1,6 @@
 class UnifiSite < ApplicationRecord
   belongs_to :account
-  has_many :statements, :as => :service
+  has_many :statements, :as => :service, dependent: :destroy
 
   monetize :hosting_fee_cents
   validates :name, presence: true
