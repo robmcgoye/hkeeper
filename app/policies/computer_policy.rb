@@ -23,7 +23,7 @@ class ComputerPolicy < ApplicationPolicy
   end
   
   def destroy?
-    @user.has_any_role? :admin, :tech
+    @user.has_any_role? :admin
   end
 
 end

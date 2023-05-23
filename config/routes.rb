@@ -17,10 +17,10 @@ Rails.application.routes.draw do
     resources :computer_billings, only: [:create, :new, :edit, :update]
     resources :api_keys, only: :update
     # resources :roles, except: [:show]
-    get "roles/new", to: "roles#new"
-    post "roles/new", to: "roles#create"
-    delete "roles/:user_id", to: "roles#destroy", as: "role_removal"
-    get 'roles', to: 'roles#index'
+    get "roles/new", to: "account_roles#new"
+    post "roles/new", to: "account_roles#create"
+    delete "roles/:user_id", to: "account_roles#destroy", as: "role_removal"
+    get 'roles', to: 'account_roles#index'
   end
 
   resources :computers, except: [:new, :create], shallow: true do
@@ -54,5 +54,8 @@ Rails.application.routes.draw do
   delete "profile", to: "users#destroy"
   get "users", to: "user_roles#index"
   get "dashboard", to: "dashboards#index"
-
+  resources :user_administration, except: [:destroy] do
+    get "roles", to: "user_roles#edit"
+    post "roles", to: "user_roles#update"
+  end
 end

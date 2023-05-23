@@ -1,0 +1,31 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+      <h3>Global roles for: <%= @user.full_name %></h3>
+
+<%= form_with model: @user_roles, url: user_administration_roles_path(@user), :data => {:turbo => "false"}, method: :post do |f| %>
+        <div class="form-check form-switch">
+          <%= f.check_box :admin, class: "form-check-input", id: "flexSwitchCheckweb" %>
+          <%= f.label :admin,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+        </div>
+        <div class="form-check form-switch">
+          <%= f.check_box :tech, class: "form-check-input", id: "flexSwitchCheckweb" %>
+          <%= f.label :tech,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+        </div>
+        <div class="form-check form-switch">
+          <%= f.check_box :user, class: "form-check-input", id: "flexSwitchCheckweb" %>
+          <%= f.label :user,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+        </div>
+        <div class="actions pt-2">
+          <%= f.submit "Update Roles", class: "btn btn-sm btn-outline-dark" %>
+        </div>
+        <% end %>
+
+      <div class="btn-group">
+        <%= link_to user_administration_index_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to Users
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>    

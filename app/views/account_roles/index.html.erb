@@ -18,7 +18,7 @@
         <thead class="table-secondary">
           <tr>
             <th scope="col">Email</th>
-            <th scope="col">Role</th>
+
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -26,10 +26,11 @@
           <% @account.managers.each do |user| %>
             <tr>
               <td><%= user.email %></td>
-              <td><%= user.roles.where(resource_type: nil).pluck(:name) %></td>
               <td>
-                <%= button_to account_role_removal_path(@account, user.id), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
-                  <i class="bi bi-trash pe-1"></i>Remove
+                <% if policy(:account).destroy? %>
+                  <%= button_to account_role_removal_path(@account, user.id), method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+                    <i class="bi bi-trash pe-1"></i>Remove
+                  <% end %>
                 <% end %>
               </td>
             </tr>

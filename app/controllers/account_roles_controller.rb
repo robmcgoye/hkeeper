@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+class AccountRolesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_account
   before_action :set_user, only: [:destroy, :create]
@@ -36,9 +36,8 @@ class RolesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_account
-      # binding.break
       @account = Account.find_by id: params[:account_id]
     end
   

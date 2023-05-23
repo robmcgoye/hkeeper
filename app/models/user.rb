@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   rolify
-  attr_accessor :current_password
-  before_save { self.email = email.downcase }
-  before_save :downcase_unconfirmed_email
+  attr_accessor :current_password, :confirmed_email
+  # before_save { self.email = email.downcase }
+  before_save :format_data
   after_create :assign_default_role
+
+  after_initialize do |user|
+    user.confirmed_email = user.confirmed?
+  end
 
   CONFIRMATION_TOKEN_EXPIRATION = 10.minutes
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
@@ -26,6 +30,10 @@ class User < ApplicationRecord
   
   validates :unconfirmed_email, format: {with: URI::MailTo::EMAIL_REGEXP, allow_blank: true}
   
+  def full_name
+    "#{ first_name.capitalize } #{ last_name.capitalize }"
+  end
+
   def generate_password_reset_token
     signed_id expires_in: PASSWORD_RESET_TOKEN_EXPIRATION, purpose: :reset_password
   end
@@ -86,6 +94,18 @@ class User < ApplicationRecord
     self.unconfirmed_email = unconfirmed_email.downcase
   end
 
+  def format_data
+    downcase_unconfirmed_email
+    self.email = email.downcase
+    if !self.confirmed_email.nil?
+      if self.confirmed_email != self.confirmed_at? && self.confirmed_at?
+        self.confirmed_at = nil
+      elsif self.confirmed_email != self.confirmed_at? && !self.confirmed_at?
+        self.confirmed_at = Date.today
+      end
+    end
+  end
+
   def assign_default_role
     if User.count == 1
       add_role(:admin) if roles.blank?
@@ -96,4 +116,5 @@ class User < ApplicationRecord
     end
     # self.add_role(:enduser) if self.roles.blank?
   end
+
 end

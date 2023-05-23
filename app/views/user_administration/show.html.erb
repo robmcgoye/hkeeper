@@ -1,0 +1,21 @@
+<div class="container py-3">
+  <div class="card mb-3 shadow-lg rounded border">
+    <div class="card-body text-dark">
+
+      <%= render "user", user: @user %>
+
+      <div class="btn-group pt-1">
+          <%= link_to edit_user_administration_path(@user), class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-pencil pe-1"></i>Edit this User
+          <% end %>
+        <%= link_to user_administration_index_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-arrow-left-circle pe-1"></i>Back to Users
+        <% end %>
+          <%#= button_to @domain, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
+            <%# <i class="bi bi-trash pe-1"></i>Delete %>
+          <%# end %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ class AccountRolePolicy < ApplicationPolicy
   end
 
   def index?
-    authorized_roles?
+    @user.has_any_role? :admin, :tech
   end
 
   def destroy?
@@ -25,7 +25,7 @@ class AccountRolePolicy < ApplicationPolicy
   private
 
   def authorized_roles?
-    @user.has_any_role? :admin, :tech
+    @user.has_any_role? :admin
   end
 
 end

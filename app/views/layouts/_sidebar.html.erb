@@ -16,8 +16,8 @@
     
     <%= link_to "Statements", statements_path, class: "#{"active " unless !request.path.start_with?("/statements")}list-group-item list-group-item-action list-group-item-light p-3" %>
 
-    <% if policy(:user_role).index? %>
-      <%= link_to "Users", users_path, class: "#{"active " unless request.path != users_path}list-group-item list-group-item-action list-group-item-light p-3" %>
+    <% if policy(:user_administration).cru_actions? %>
+      <%= link_to "Users", user_administration_index_path, class: "#{"active " unless request.path != user_administration_index_path}list-group-item list-group-item-action list-group-item-light p-3" %>
     <% end %>
   </div>
 </div>
