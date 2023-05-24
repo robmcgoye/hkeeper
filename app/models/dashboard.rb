@@ -33,7 +33,7 @@ class Dashboard
   end
 
   def computers_with_errors
-    @computers.job_errors
+    @computers.recent_job_errors(30)
   end
 
 end
