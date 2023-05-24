@@ -70,7 +70,7 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-chart.js@4, chart.js@^4.2.1:
+chart.js@4:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.2.1.tgz#d2bd5c98e9a0ae35408975b638f40513b067ba1d"
   integrity sha512-6YbpQ0nt3NovAgOzbkSSeeAQu/3za1319dPUQTXn9WcOpywM8rGKxJHrhS8V8xEkAlk8YhEfjbuAPfUyp6jIsw==

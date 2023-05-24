@@ -41,6 +41,6 @@ class ComputerBillingsController < ApplicationController
   end
 
   def computer_billing_params
-    params.require(:computer_billing).permit(:account_id, :cost_per_job)
+    params.require(:computer_billing).permit(:account_id, :cost_per_computer)
   end  
 end

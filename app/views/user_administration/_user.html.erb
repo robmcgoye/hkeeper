@@ -1,13 +1,38 @@
 <div class="card">
   <div class="card-header fw-bold">
-    <%= "#{user.first_name} #{user.last_name}" %>
+    <div class="row">
+      <div class="col-auto">
+        <%= "#{user.first_name} #{user.last_name}" %>
+      </div>
+      <% if !user.active? %>
+        <div class="col ps-2">
+          <span class="badge rounded-pill bg-warning">Account not active</span>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="card-body">
-
-        <p class="card-text">
-          <b>email:</b> <%= user.email %><br>
-          <b>phone:</b> <%= user.phone %><br>
-        </p>
-    
+    <div class="row">
+      <div class="col-auto fw-bold">
+        Active Roles:
+      </div>
+      <div class="col">
+        <%= format_roles(user) %>
+      </div>
+    </div>
+    <p class="card-text">
+      <b>Email:</b> <%= user.email %><br>
+      <b>Phone:</b> <%= user.phone %><br>
+    </p>
+    <div class="card">
+      <div class="card-header fw-bold">
+        Accounts
+      </div>
+       <div class="card-body">
+        <% user.accounts.each do |account| %>
+          <%= account.name %><br>
+        <% end %>
+       </div>
+    </div>
   </div>
 </div>

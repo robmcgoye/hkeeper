@@ -7,15 +7,17 @@ class SessionsController < ApplicationController
       if @user.unconfirmed?
         redirect_to new_confirmation_path, alert: "Account not confirmed."
       elsif @user.authenticate(params[:user][:password])
-        login @user
-        redirect_to root_path, notice: "Signed in."
+        if @user.active?
+          login @user
+          redirect_to root_path, notice: "Signed in."
+        else
+          failed_login("Account has been disabled. Contact the administrator.") 
+        end
       else
-        flash.now[:alert] = "Incorrect email or password."
-        render :new, status: :unprocessable_entity
+        failed_login("Incorrect email or password.")
       end
     else
-      flash.now[:alert] = "Incorrect email or password."
-      render :new, status: :unprocessable_entity
+      failed_login("Incorrect email or password.")
     end
   end
 
@@ -27,4 +29,10 @@ class SessionsController < ApplicationController
   def new
   end
 
+  private
+
+  def failed_login(message)
+    flash.now[:alert] = message
+    render :new, status: :unprocessable_entity
+  end
 end

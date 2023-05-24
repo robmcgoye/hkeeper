@@ -3,23 +3,23 @@
     <div class="card-body text-dark">
       <h3>Global roles for: <%= @user.full_name %></h3>
 
-<%= form_with model: @user_roles, url: user_administration_roles_path(@user), :data => {:turbo => "false"}, method: :post do |f| %>
+      <%= form_with model: @user_roles, url: user_administration_roles_path(@user), :data => {:turbo => "false"}, method: :post do |f| %>
         <div class="form-check form-switch">
-          <%= f.check_box :admin, class: "form-check-input", id: "flexSwitchCheckweb" %>
-          <%= f.label :admin,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+          <%= f.check_box :admin, class: "form-check-input", id: "flexSwitchCheckAdmin" %>
+          <%= f.label :admin,  class: "form-check-label", for: "flexSwitchCheckAdmin" %>        
         </div>
         <div class="form-check form-switch">
-          <%= f.check_box :tech, class: "form-check-input", id: "flexSwitchCheckweb" %>
-          <%= f.label :tech,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+          <%= f.check_box :tech, class: "form-check-input", id: "flexSwitchCheckTech" %>
+          <%= f.label :tech,  class: "form-check-label", for: "flexSwitchCheckTech" %>        
         </div>
         <div class="form-check form-switch">
-          <%= f.check_box :user, class: "form-check-input", id: "flexSwitchCheckweb" %>
-          <%= f.label :user,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+          <%= f.check_box :user, class: "form-check-input", id: "flexSwitchCheckUser" %>
+          <%= f.label :user,  class: "form-check-label", for: "flexSwitchCheckUser" %>        
         </div>
         <div class="actions pt-2">
           <%= f.submit "Update Roles", class: "btn btn-sm btn-outline-dark" %>
         </div>
-        <% end %>
+      <% end %>
 
       <div class="btn-group">
         <%= link_to user_administration_index_path, class: "btn btn-sm btn-outline-dark" do %>

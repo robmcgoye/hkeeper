@@ -62,7 +62,7 @@ gem 'resque', '~> 2.4'
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 gem 'whenever', '~> 1.0', require: false
 gem 'money-rails', '~> 1.15'
-gem 'chartkick', '~> 5.0', '>= 5.0.1'
+# gem 'chartkick', '~> 5.0', '>= 5.0.1'
 gem 'city-state', '~> 0.1.0'
 gem 'wicked_pdf', '~> 2.6', '>= 2.6.3'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.6'

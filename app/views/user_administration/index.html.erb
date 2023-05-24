@@ -15,15 +15,12 @@
   <tbody>
     <% @users.each do |user| %>
       <% if user != current_user %>
-        <tr>
+        <tr class="<%= user.active ? 'fst-normal fw-normal' : 'fst-italic fw-light' %>">
           <td>
             <%= link_to user.email, user_administration_path(user) %>
           </td>
           <td>
-            <% roles = user.roles.where(resource_type: nil).pluck(:name) %>
-            <% roles.each do |role| %>
-              <span class="badge rounded-pill <%= role == "user" ? "bg-secondary" : "bg-primary" %>"><%= role %></span>
-            <% end %>
+            <%= format_roles(user) %>
           </td>
           <td>
             <div class="btn-group">

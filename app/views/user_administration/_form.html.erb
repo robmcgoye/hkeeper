@@ -1,44 +1,45 @@
 <%= form_with model: user, url: form_url, :data => {:turbo => "false"} do |f| %>
 
   <%= render 'shared/error_messages', resource: user %>
-        <div class="form-check form-switch">
-          <%= f.check_box :active, class: "form-check-input", id: "flexSwitchCheckweb" %>
-          <%= f.label :active,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
-        </div>
-        <div class="field form-group">
-          <%= f.label :first_name %><br />
-          <%= f.text_field :first_name, autofocus: true, required: true, class: "form-control" %>
-        </div>
-        <div class="field form-group">
-          <%= f.label :last_name %><br />
-          <%= f.text_field :last_name, autofocus: true, required: true, class: "form-control" %>
-        </div>
-        <div class="field form-group">
-          <%= f.label :phone %><br />
-          <%= f.text_field :phone, autofocus: true, class: "form-control" %>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="field form-group">
-              <%= f.label :email, "Email" %>
-              <%= f.email_field :email, autofocus: true, class: "form-control" %>
-            </div>
-          </div>
-          <div class="col-auto align-self-end">
-            <div class="form-check form-switch">
-              <%= f.check_box :confirmed_email, class: "form-check-input", id: "flexSwitchCheckweb" %>
-              <%= f.label :confirmed_email,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
-            </div>
-          </div>
-        </div>
-        <div class="field form-group">
-          <%= f.label :password, "Password #{'(leave blank if you don\'t want to change it)' unless user.new_record? }" %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
-        <div class="field form-group">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, class: "form-control" %>
-        </div>
+  
+  <div class="form-check form-switch">
+    <%= f.check_box :active, class: "form-check-input", id: "flexSwitchCheckActive" %>
+    <%= f.label :active,  class: "form-check-label", for: "flexSwitchCheckActive" %>        
+  </div>
+  <div class="field form-group">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, required: true, class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true, required: true, class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, autofocus: true, class: "form-control" %>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="field form-group">
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-auto align-self-end">
+      <div class="form-check form-switch">
+        <%= f.check_box :confirmed_email, class: "form-check-input", id: "flexSwitchCheckweb" %>
+        <%= f.label :confirmed_email,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+      </div>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :password, "Password #{'(leave blank if you don\'t want to change it)' unless user.new_record? }" %>
+    <%= f.password_field :password, class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+  </div>
 
   <div class="actions pt-2">
     <%= f.button class: "btn btn-sm btn-outline-dark" do %>

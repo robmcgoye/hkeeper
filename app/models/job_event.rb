@@ -5,6 +5,8 @@ class JobEvent < ApplicationRecord
   
   after_save :send_alert, unless: Proc.new { status != "je_error" }
 
+  scope :errors, -> { where(status: :je_error).order(updated_at: :desc) }
+  
   def get_status
     if status == "je_info"
       "Info"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_153232) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_143125) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153232) do
   end
 
   create_table "computer_billings", force: :cascade do |t|
-    t.integer "cost_per_job_cents", default: 0, null: false
-    t.string "cost_per_job_currency", default: "USD", null: false
+    t.integer "cost_per_computer_cents", default: 0, null: false
+    t.string "cost_per_computer_currency", default: "USD", null: false
     t.datetime "billed_on"
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -161,6 +161,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153232) do
     t.string "phone"
     t.datetime "confirmed_at"
     t.string "unconfirmed_email"
+    t.boolean "active"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -22,10 +22,9 @@
       <div class="col d-flex align-items-start">
         <i class="bi bi-arrow-right-circle pe-1"></i>
         <div>
-          <% computers_not_contacted = @dashboard.computers_not_contacted(30) %>
           <h5 class="fw-bold mb-0">Computers not communicating in the last 30 days</h5>
           <p>
-            <% computers_not_contacted.each do |computer| %>
+            <% (@dashboard.computers_not_contacted(30)).each do |computer| %>
               <%= "#{computer.account.name} #{computer.name} " %>
               <br>
             <% end %>
@@ -35,8 +34,12 @@
       <div class="col d-flex align-items-start">
         <i class="bi bi-arrow-right-circle pe-1"></i>
         <div>
-          <h5 class="fw-bold mb-0">Featured title</h5>
-          <p>Paragraph of text beneath the heading to explain the heading.</p>
+          <h5 class="fw-bold mb-0">Computers with Errors</h5>
+          <p>
+            <% (@dashboard.computers_with_errors).each do |computer| %>
+              <%= "#{computer.account.name} #{computer.name} " %><br>
+            <% end %>
+          </p>
         </div>
       </div>
 

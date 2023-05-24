@@ -32,4 +32,8 @@ class Dashboard
     @computers.not_contacted(number_of_days)
   end
 
+  def computers_with_errors
+    @computers.job_errors
+  end
+
 end
