@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post "domains_filter", to: "domains#filter"
   post "unifi_sites_filter", to: "unifi_sites#filter"
   get "statements/:id/invoice", to: "statements#pdf", as: "pdf_statement"
-  resources :accounts, except: [:show] do
+  resources :accounts do
     resources :billers, only: [:create, :new, :edit, :update]
     # post "computer_billings", to: "billers#create_computer_billing", as: "computer_billings"
     # patch "computer_billings/:id", to: "billers#update_computer_billing", as: "computer_billing"

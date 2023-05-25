@@ -1,0 +1,68 @@
+<div class="card">
+
+  <div class="card-header fw-bold">
+    <%= account.name %>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-auto fw-bold">
+        API Key:
+      </div>
+      <div class="col">
+        <%= account.private_api_key %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body pt-1 ps-1">
+        
+        <div class="card-text">
+          <% biller = account.billers.take %>
+          <div class="row">
+            <div class="col-auto fw-bold">
+              Invoices emailed to:
+            </div>
+            <div class="col">
+              <%= biller.email %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto fw-bold">
+              Monthly charge per computer:
+            </div>
+            <div class="col">
+              <%= account.computer_billing.cost_per_computer.format %>
+            </div>
+          </div>
+          <div class="card-title fw-bold">Address:</div>
+          <div class="row">
+            <div class="col">
+              <%= biller.name %>
+            </div>
+          </div>
+          <div class="row">
+           <div class="col">
+              <%= biller.address_line_1 %>
+            </div>
+          </div>
+          <div class="row">
+           <div class="col">
+              <%= biller.address_line_2 %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+               <%= biller.city %>
+            </div>
+            <div class="col-auto">
+               <%= biller.state %>
+            </div>
+            <div class="col">
+               <%= biller.zip %>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_account, only: %i[ edit update destroy ]
+  before_action :set_account, only: %i[ show edit update destroy ]
 
   def index
     if params[:all].to_i == 1
@@ -25,6 +25,9 @@ class AccountsController < ApplicationController
   def edit
   end
 
+  def show
+  end
+  
   def create
     @account = Account.new(account_params)
     authorize @account

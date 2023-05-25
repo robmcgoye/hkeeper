@@ -36,4 +36,7 @@ class Dashboard
     @computers.recent_job_errors(30)
   end
 
+  def computers_bios_older(num_years)
+    @computers.bios_aged(num_years)
+  end
 end

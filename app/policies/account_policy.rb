@@ -11,6 +11,7 @@ class AccountPolicy < ApplicationPolicy
   end
 
   def show?
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record }
   end
   
   def new?
@@ -26,11 +27,11 @@ class AccountPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.has_any_role? :admin, :tech, { name: :creator, resource: @account }
+    @user.has_any_role? :admin, :tech #, { name: :creator, resource: @record }
   end
 
   def destroy?
-    @user.has_any_role? :admin, { name: :creator, resource: @account }
+    @user.has_role? :admin
   end 
 
 end

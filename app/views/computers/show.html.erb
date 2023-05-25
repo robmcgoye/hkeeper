@@ -11,7 +11,28 @@
   </div>
   <div class="card-body">
     <p class="card-text">
+      
       <div class="row">
+        <div class="row">
+          <div class="col-auto text-primary">
+            Added on:
+          </div>
+          <div class="col">
+            <%= format_date(@computer.created_at) %>
+          </div>          
+          <div class="col-auto text-primary">
+            Last contacted on:
+          </div>
+          <div class="col">
+            <%= format_date(@computer.last_contacted_at) %>
+          </div>          
+          <div class="col-auto text-primary">
+            Bios relased on:
+          </div>          
+          <div class="col">
+            <%= format_date(@computer.bios_released_on) %>
+          </div>          
+        </div>
         <div class="col">
           <div class="row">
             <div class="col-auto text-primary">
@@ -79,16 +100,15 @@
               <%= @computer.key %>
             </div>
           </div>
-
         </div>
-          <div class="row">
-            <div class="col-auto text-primary">
-              Description : 
-            </div>
-            <div class="col">
-              <%= @computer.description %>
-            </div>
+        <div class="row">
+          <div class="col-auto text-primary">
+            Description : 
           </div>
+          <div class="col">
+            <%= @computer.description %>
+          </div>
+        </div>
       </div>
       <% if policy(:computer).edit? %>
         <div class="card pt-2">

@@ -42,7 +42,17 @@
           </p>
         </div>
       </div>
-
+      <div class="col d-flex align-items-start">
+        <i class="bi bi-arrow-right-circle pe-1"></i>
+        <div>
+          <h5 class="fw-bold mb-0">Computers Bios older then 5 years</h5>
+          <p>
+            <% (@dashboard.computers_bios_older(5)).each do |computer| %>
+              <%= "#{computer.account.name} #{computer.name} " %><br>
+            <% end %>
+          </p>
+        </div>
+      </div>
 
     </div>
     </div>

@@ -11,5 +11,10 @@ module ApplicationHelper
   #   end  
   # end
   
+  def format_date (date_to_format)
+    if !date_to_format.nil?
+      date_to_format.strftime(" %m/%d/%Y")
+    end
+  end
 
 end
