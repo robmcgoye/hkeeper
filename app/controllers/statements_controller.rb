@@ -62,13 +62,21 @@ class StatementsController < ApplicationController
     params.require(:statement_filter_form).permit(:paid, :unpaid, :pending, :voided, :account_id)
   end
 
+  def get_filter_param(filter_param)
+    if filter_param.nil?
+      0
+    else
+      filter_param
+    end
+  end
+
   def build_filter_params
     {
-      "pending" => params[:statement_filter_form][:pending],
-      "unpaid" => params[:statement_filter_form][:unpaid],
-      "paid" => params[:statement_filter_form][:paid],
-      "voided" => params[:statement_filter_form][:voided],
-      "account_id" => params[:statement_filter_form][:account_id]
+      "pending" => get_filter_param(params[:statement_filter_form][:pending]),
+      "unpaid" => get_filter_param(params[:statement_filter_form][:unpaid]),
+      "paid" => get_filter_param(params[:statement_filter_form][:paid]),
+      "voided" => get_filter_param(params[:statement_filter_form][:voided]),
+      "account_id" => get_filter_param(params[:statement_filter_form][:account_id])
     }
   end
 end
