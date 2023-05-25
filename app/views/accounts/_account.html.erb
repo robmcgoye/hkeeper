@@ -17,50 +17,57 @@
         
         <div class="card-text">
           <% biller = account.billers.take %>
-          <div class="row">
-            <div class="col-auto fw-bold">
-              Invoices emailed to:
+          <% if !biller.nil? %>
+            <div class="row">
+              <div class="col-auto fw-bold">
+                Invoices emailed to:
+              </div>
+              <div class="col">
+                <%= biller.email %>
+              </div>
             </div>
+            <div class="row">
+              <div class="col-auto fw-bold">
+                Monthly charge per computer:
+              </div>
+              <div class="col">
+                <% if !account.computer_billing.nil? %>
+                  <%= account.computer_billing.display_cost_per_computer %>
+                <% else %>
+                  Not set!
+                <% end %>
+              </div>
+            </div>
+            <div class="card-title fw-bold">Address:</div>
+            <div class="row">
+              <div class="col">
+                <%= biller.name %>
+              </div>
+            </div>
+            <div class="row">
             <div class="col">
-              <%= biller.email %>
+                <%= biller.address_line_1 %>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-auto fw-bold">
-              Monthly charge per computer:
-            </div>
+            <div class="row">
             <div class="col">
-              <%= account.computer_billing.cost_per_computer.format %>
+                <%= biller.address_line_2 %>
+              </div>
             </div>
-          </div>
-          <div class="card-title fw-bold">Address:</div>
-          <div class="row">
-            <div class="col">
-              <%= biller.name %>
+            <div class="row">
+              <div class="col-auto">
+                <%= biller.city %>
+              </div>
+              <div class="col-auto">
+                <%= biller.state %>
+              </div>
+              <div class="col">
+                <%= biller.zip %>
+              </div>
             </div>
-          </div>
-          <div class="row">
-           <div class="col">
-              <%= biller.address_line_1 %>
-            </div>
-          </div>
-          <div class="row">
-           <div class="col">
-              <%= biller.address_line_2 %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-auto">
-               <%= biller.city %>
-            </div>
-            <div class="col-auto">
-               <%= biller.state %>
-            </div>
-            <div class="col">
-               <%= biller.zip %>
-            </div>
-          </div>
-          
+          <% else %>
+            Billing not set!
+          <% end %>
         </div>
       </div>
     </div>  

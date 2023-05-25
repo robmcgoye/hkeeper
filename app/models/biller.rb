@@ -8,7 +8,11 @@ class Biller < ApplicationRecord
   validates :name, presence: true
 
   def email
-    User.find(self.user_id).email
+    if !self.user_id.nil?
+      User.find(self.user_id).email
+    else
+      "Not set"
+    end
   end
 
 end
