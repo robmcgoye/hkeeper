@@ -3,7 +3,7 @@
     <div class="card-body text-dark">
       <h3>New User</h3>
 
-      <%= render "form", user: @user, form_url: new_user_administration_path %>
+      <%= render "form", user: @user, form_url: user_administration_index_url %>
 
       <div class="btn-group pt-1">
         <%= link_to user_administration_index_path, class: "btn btn-sm btn-outline-dark" do %>

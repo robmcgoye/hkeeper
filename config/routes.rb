@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     # post "computer_billings", to: "billers#create_computer_billing", as: "computer_billings"
     # patch "computer_billings/:id", to: "billers#update_computer_billing", as: "computer_billing"
     resources :computer_billings, only: [:create, :new, :edit, :update]
-    resources :api_keys, only: :update
+    resources :api_keys, only: :create
     # resources :roles, except: [:show]
     get "roles/new", to: "account_roles#new"
     post "roles/new", to: "account_roles#create"

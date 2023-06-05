@@ -1,7 +1,7 @@
 class UserAdministrationController < ApplicationController
   before_action :authenticate_user!
   before_action :check_permissions
-  before_action :set_user, only: %i[ show edit update create ]
+  before_action :set_user, only: %i[ show edit update ]
 
   def index
     @users = User.all

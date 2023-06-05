@@ -1,4 +1,4 @@
-<%= form_with model: account, url: account_api_key_path(account), :data => {:turbo => "false"} do |f| %>
+<%= form_with model: account, url: account_api_keys_path(account), :data => {:turbo => "false"} do |f| %>
   <div class="row">
     <div class="col field form-group">
       <%= f.label :private_api_key, "API Key" %><br />

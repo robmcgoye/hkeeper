@@ -28,7 +28,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update( job_params )
-      flash[:notice] = "The job was successfully updated"
+      flash[:notice] = "The Job was successfully updated"
       redirect_to computer_path(@computer)
     else
       render :edit
@@ -37,7 +37,7 @@ class JobsController < ApplicationController
 
   def destroy
     @job.destroy
-    flash[:notice] = "The job was successfully deleted"
+    flash[:notice] = "The Job was successfully deleted"
     redirect_to computer_path(@computer)
   end 
   
