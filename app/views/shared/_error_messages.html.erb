@@ -1,14 +1,14 @@
 
 <% if resource.errors.any? %>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error_explanation">
-    <h4 class="alert-heading">
+  <div class="alert alert-danger alert-dismissible fade show pb-1" role="alert" id="error_explanation">
+    <h5 class="alert-heading">
       <i class="bi bi-exclamation-triangle pe-2"></i>
       The following errors prevented the 
       <%= resource.class.name.downcase %> from being saved.
-    </h4>
+    </h5>
     <ul>
       <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="fs-6"><%= message %></li>
       <% end %>
     </ul>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

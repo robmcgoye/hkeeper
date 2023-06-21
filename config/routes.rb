@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :statements, except: [:create, :new, :destroy]
   post "statements_filter", to: "statements#filter"
   post "computers_filter", to: "computers#filter"
-  post "domains_filter", to: "domains#filter"
+  get "domains_filter", to: "domains#filter"
+  get "domains_sort", to: "domains#sort"
   post "unifi_sites_filter", to: "unifi_sites#filter"
   get "statements/:id/invoice", to: "statements#pdf", as: "pdf_statement"
   resources :accounts do

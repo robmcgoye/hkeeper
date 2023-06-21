@@ -1,0 +1,75 @@
+  <div class="row border border-primary p-2 m-1">
+    <div class= "col">
+      <div class="row">
+        <div class="col">
+          <b>ACCOUNT:</b><%= domain.account.name %>
+        </div>
+        <div class="col">
+          <b>NAME:</b> <%= domain.name %>
+        </div>
+        <div class="col">
+          <b>EXPIRES:</b> <%= domain.expires_on.strftime(" %m/%d/%Y") %>
+        </div>
+
+      </div>
+      <div class="row pt-1">
+      
+        <div class="col">
+          <div class="row">
+            <div class="col-auto">
+              <span class="text-nowrap pe-3">
+            <i class="<%= domain.web_hosting? || domain.web_hosting? ? "bi bi-toggle-on" : "bi bi-toggle-off" %>"></i>
+            Web Hosting
+          </span>
+            </div>
+            <div class="col">
+              <span class="text-nowrap pe-3">
+            <i class="<%= domain.email_hosting? || domain.email_hosting? ? "bi bi-toggle-on" : "bi bi-toggle-off" %>"></i>
+            Email Hosting
+          </span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <span class="text-nowrap pe-2">
+            <i class="<%= domain.registration? || domain.registration? ? "bi bi-toggle-on" : "bi bi-toggle-off" %>"></i>
+            Domain Registration        
+          </span>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col">
+          <b>Billed on:</b> <%= domain.billed_date %><br>
+        
+        </div>
+        <div class="col">
+          <b>Annual Fee:</b> <%= Money.us_dollar(domain.annual_fee).format %>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col">
+          <%= domain.notes %>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="btn-group">
+        <%= link_to domains_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-caret-down-fill pe-1"></i>
+        <% end %>
+        <% if policy(:domain).edit? %>
+          <%#= link_to edit_domain_path(domain, page: page, index: index), class: "btn btn-sm btn-outline-dark" do %>
+            <%# <i class="bi bi-pencil pe-1"></i> %>
+          <%# end %>
+        <% end %>
+        <% if policy(:domain).destroy? %>
+          <%#= button_to domain, params: {page: page}, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_frame: "filter_results", turbo_confirm: 'Are you sure?'}} do %>
+          <%= button_to domain, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_frame: "filter_results", turbo_confirm: 'Are you sure?'}} do %>
+            <i class="bi bi-trash pe-1"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>

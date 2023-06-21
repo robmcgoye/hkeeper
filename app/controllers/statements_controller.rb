@@ -6,6 +6,7 @@ class StatementsController < ApplicationController
     set_filter(:statement_filter, build_filter_params)
     @statement_form = StatementFilterForm.new(statement_filter_params)
     @pagy, @statements = pagy(@statement_form.filter(policy_scope(Statement)))
+    render :index
   end
 
   def index

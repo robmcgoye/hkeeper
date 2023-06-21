@@ -6,7 +6,8 @@ class UnifiSitesController < ApplicationController
   def filter
     set_filter(:unifi_site_filter, {"account_id" => params[:unifi_site_filter_form][:account_id]})
     @unifi_site_form = UnifiSiteFilterForm.new(unifi_site_filter_params)
-    @pagy, @unifi_sites = pagy(@unifi_site_form.filter(policy_scope(UnifiSite)))  
+    @pagy, @unifi_sites = pagy(@unifi_site_form.filter(policy_scope(UnifiSite)))
+    render :index  
   end 
 
   def index

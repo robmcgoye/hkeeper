@@ -1,0 +1,14 @@
+      <%= turbo_frame_tag Domain.new do %>
+        <div class="row">
+          <div class="col">
+            <h3>Domains</h3>
+          </div>
+          <div class="col-auto">
+            <% if policy(:domain).new? %>
+              <%= link_to new_domain_path, class: "btn btn-sm btn-outline-dark" do %>
+                <i class="bi bi-plus-circle pe-1"></i>New domain
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>

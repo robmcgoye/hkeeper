@@ -5,7 +5,8 @@ class ComputersController < ApplicationController
   def filter
     set_filter(:computer_filter, {"account_id" => params[:computer_filter_form][:account_id]})
     @computer_form = ComputerFilterForm.new(computer_filter_params)
-    @pagy, @computers = pagy(@computer_form.filter(policy_scope(Computer)))  
+    @pagy, @computers = pagy(@computer_form.filter(policy_scope(Computer)))
+    render :index  
   end 
   
   def index

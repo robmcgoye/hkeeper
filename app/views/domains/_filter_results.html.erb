@@ -1,0 +1,39 @@
+<%= turbo_frame_tag "filter_results" do %>
+  <div class="row mt-1">
+    <div class="col tb-header p-1">
+          <%= link_to domains_sort_path(page: @pagy.page, sort: "account"), class: "btn btn-sm btn-outline-#{ @sort != "account" ? "secondary" : "primary active"}" do %>
+            Account
+            <% if @sort == "account" %>
+              <i class="bi bi-sort-alpha-down ps-2"></i>
+            <% end %>
+          <% end %>
+    </div>
+    <div class="col tb-header p-1">
+          <%= link_to domains_sort_path(page: @pagy.page, sort: "name"), class: "btn btn-sm btn-outline-#{ @sort != "name" ? "secondary" : "primary active"}" do %>
+            Name
+            <% if @sort == "name" %>
+              <i class="bi bi-sort-alpha-down ps-2"></i>
+            <% end %>
+          <% end %>
+    </div>
+    <div class="col tb-header p-1">
+          <%= link_to domains_sort_path(page: @pagy.page, sort: "expires"), 
+              class: "btn btn-sm btn-outline-#{ @sort != "expires" ? "secondary" : "primary active"}" do %>
+            Expires
+            <% if @sort == "expires" %>
+              <i class="bi bi-sort-alpha-down ps-2"></i>
+            <% end %>
+          <% end %>
+    </div>
+    <div class="col tb-header p-1"></div>
+  </div>
+
+  <% @domains.each_with_index do |domain, index| %>
+    <%= render "domain", domain: domain, index: index, page: @pagy.page %>
+  <% end %>
+
+
+  <div class="d-flex justify-content-center pt-2">
+    <%== pagy_bootstrap_nav(@pagy, link_extra: 'data-turbo-action="advance"') if @pagy.pages > 1 %>
+  </div>  
+<% end %>

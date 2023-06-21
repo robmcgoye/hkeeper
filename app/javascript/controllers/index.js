@@ -9,3 +9,5 @@ import { application } from "./application"
 
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)

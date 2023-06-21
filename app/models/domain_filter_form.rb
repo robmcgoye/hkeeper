@@ -18,11 +18,27 @@ class DomainFilterForm
     false
   end
      
-  def filter(domain)
+  def filter(domain, sort = "account")
     if self.account_id.to_i > 0
-      domain.domains_in_account(self.account_id.to_i)
+      if sort == "account"
+        domain.domains_in_account(self.account_id.to_i).sort_on_account 
+      elsif sort == "name"
+        domain.domains_in_account(self.account_id.to_i).sort_on_name 
+      elsif sort == "expires"
+        domain.domains_in_account(self.account_id.to_i).sort_on_expires 
+      else
+        domain.domains_in_account(self.account_id.to_i)
+      end
     else
-      domain
+      if sort == "account"
+        domain.sort_on_account 
+      elsif sort == "name"
+        domain.sort_on_name 
+      elsif sort == "expires"
+        domain.sort_on_expires 
+      else
+        domain
+      end
     end
   end
 

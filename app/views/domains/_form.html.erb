@@ -1,65 +1,83 @@
-<%= form_with model: domain, :data => {:turbo => "false"} do |f| %>
-  <%= render 'shared/error_messages', resource: domain %>
+<%# :data => {:turbo => "false"} %>
+<%= form_with model: domain  do |f| %>
+  <%#= binding.break %>
+  <%= f.hidden_field :page, value: params[:page] %>
+  <%= f.hidden_field :index, value: params[:index] %>
 
-  <div class="field form-group pb-1">
-    <%= f.label "Account" %>
-      <%= f.collection_select :account_id, @accounts, :id, :name,  
-        {}, {class: "form-select"}  %>
-  </div>
-  <div class="field form-group pb-1">
-    <%= f.label "Domain Name" %><br />
-    <%= f.text_field :name, placeholder: "Domain Name", class: "form-control" %>
-  </div>
-  <div class="field form-group pb-1">
-    <%= f.label "Expires on" %><br />
-    <%= f.date_field :expires_on, class: "form-control" %>
-  </div> 
-  <div class="row ps-3 pb-1">
-    <div class="col">
+  <%= render 'shared/error_messages', resource: domain %>
+  
+  <div class="row">
+    <div class= "col">
       <div class="row">
-        <div class="col-auto pt-2">
-          <div class="form-check form-switch">
-            <%= f.check_box :web_hosting, class: "form-check-input", id: "flexSwitchCheckweb" %>
-            <%= f.label :web_hosting,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
-          </div>
-          <div class="form-check form-switch">
-            <%= f.check_box :email_hosting, class: "form-check-input", id: "flexSwitchCheckmail" %>
-            <%= f.label :email_hosting,  class: "form-check-label", for: "flexSwitchCheckemail" %>        
+        <div class="col">
+          <%= f.label "Account" %>
+          <%= f.collection_select :account_id, @accounts, :id, :name,  
+              {}, {class: "form-select"}  %>
+        </div>
+        <div class="col">
+          <%= f.label "Domain Name" %><br />
+          <%= f.text_field :name, placeholder: "Domain Name", class: "form-control" %>
+        </div>
+        <div class="col">
+          <%= f.label "Expires on" %><br />
+          <%= f.date_field :expires_on, class: "form-control" %>
+        </div>
+
+      </div>
+      <div class="row pt-1">
+      
+        <div class="col">
+          <div class="row">
+            <div class="col-auto">
+              <div class="form-check form-switch">
+                <%= f.check_box :web_hosting, class: "form-check-input", id: "flexSwitchCheckweb" %>
+                <%= f.label :web_hosting,  class: "form-check-label", for: "flexSwitchCheckweb" %>        
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check form-switch">
+                <%= f.check_box :email_hosting, class: "form-check-input", id: "flexSwitchCheckemail" %>
+                <%= f.label :email_hosting,  class: "form-check-label", for: "flexSwitchCheckemail" %>        
+              </div>
+            </div>
           </div>
         </div>
         <div class="col">
-          <div class="field form-group">
-            <%= f.label "Hosting Fee" %><br />
-            <%= f.text_field :hosting_fee, class: "form-control form-control-sm" %>
+          <div class="form-check form-switch">
+            <%= f.check_box :registration, class: "form-check-input", id: "flexSwitchCheckReg" %>
+            <%= f.label :registration,  class: "form-check-label", for: "flexSwitchCheckReg" %>        
           </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col">
+          <%= f.label "Hosting Fee" %><br />
+          <%= f.text_field :hosting_fee, class: "form-control form-control-sm" %>
+        </div>
+        <div class="col">
+          <%= f.label "Registration Fee" %><br />
+          <%= f.text_field :registration_fee, class: "form-control form-control-sm" %>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col">
+          <%= f.label "Notes" %><br />
+          <%= f.text_area :notes, class: "form-control", rows: 3 %>
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="row">
-        <div class="col-auto pt-4">
-          <div class="form-check form-switch">
-            <%= f.check_box :registration, class: "form-check-input", id: "flexSwitchCheckmail" %>
-            <%= f.label :registration,  class: "form-check-label", for: "flexSwitchCheckemail" %>        
-          </div>
-        </div>
-        <div class="col">
-          <div class="field form-group">
-            <%= f.label "Registration Fee" %><br />
-            <%= f.text_field :registration_fee, class: "form-control form-control-sm" %>
-          </div>
-        </div>
+    <div class="col-auto">
+      <div class="btn-group">
+        <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-save pe-1"></i>Save
+        <% end %> 
+        <%= link_to domains_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-x-square pe-1"></i>Cancel
+        <% end %>
       </div>
-    </div>   
-  </div>
-  <div class="field form-group">
-    <%= f.label "Notes" %><br />
-    <%= f.text_area :notes, class: "form-control", rows: 8 %>
-  </div>  
-  <div class="actions pt-2">
-    <%= f.button class: "btn btn-sm btn-outline-dark" do %>
-      <i class="bi bi-save pe-1"></i>Save
-    <% end %>  
+    </div>
   </div>
 
 <% end %>

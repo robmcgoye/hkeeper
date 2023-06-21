@@ -1,9 +1,9 @@
 <div class="container py-3">
   <div class="card mb-3 shadow-lg rounded border">
     <div class="card-body text-dark">
-
-      <%= render @domain %>
-
+<%= turbo_frame_tag @domain do %>
+      <%= render "full_domain", domain: @domain %>
+<% end %>
       <div class="btn-group pt-1">
         <% if policy(:domain).edit? %>
           <%= link_to edit_domain_path(@domain), class: "btn btn-sm btn-outline-dark" do %>
