@@ -10,8 +10,11 @@ set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
-set :deploy_to, "/home/hkeeper_admin/#{fetch :application}"
-
+if fetch(:stage) == :staging
+  set :deploy_to, "/home/beta_hkeeper/#{fetch :application}"
+else
+  set :deploy_to, "/home/hkeeper_admin/#{fetch :application}"
+end
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
@@ -26,6 +29,9 @@ set :deploy_to, "/home/hkeeper_admin/#{fetch :application}"
 # append :linked_files, "config/database.yml", 'config/master.key'
 append :linked_files, "config/master.key"
 append :linked_files, "config/application.yml"
+ppend :linked_files, "config/credentials/development.key"
+append :linked_files, "config/credentials/production.key"
+append :linked_files, "config/credentials/staging.key"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"

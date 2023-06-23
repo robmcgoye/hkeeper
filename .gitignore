@@ -40,3 +40,9 @@
 /node_modules
 /development_notes.txt
 /config/application.yml
+
+/config/credentials/development.key
+
+/config/credentials/production.key
+
+/config/credentials/staging.key

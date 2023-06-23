@@ -76,10 +76,10 @@ Rails.application.configure do
     port: CONFIG[:smtp_port],
     authentication: :plain,
     enable_starttls_auto: true,
-    user_name:  Rails.application.credentials.smtp[:user_name],
-    password: Rails.application.credentials.smtp[:password]
+    user_name:  Rails.application.credentials.dig(:smtp, :user_name),
+    password: Rails.application.credentials.dig(:smtp, :password)
   }
-  config.active_record.encryption.key_derivation_salt = Rails.application.credentials.active_record_encryption[:key_derivation_salt]
-  config.active_record.encryption.primary_key = Rails.application.credentials.active_record_encryption[:primary_key]
-  config.active_record.encryption.deterministic_key = Rails.application.credentials.active_record_encryption[:deterministic_key]
+  config.active_record.encryption.key_derivation_salt = Rails.application.credentials.dig(:active_record_encryption, :key_derivation_salt)
+  config.active_record.encryption.primary_key = Rails.application.credentials.dig(:active_record_encryption, :primary_key)
+  config.active_record.encryption.deterministic_key = Rails.application.credentials.dig(:active_record_encryption, :deterministic_key)
 end

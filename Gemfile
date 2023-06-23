@@ -93,7 +93,7 @@ group :development do
   # gem "spring"
 end
 
-group :production do
+group :production, :staging do
   gem 'pg', '~> 1.4', '>= 1.4.1'
 end
 

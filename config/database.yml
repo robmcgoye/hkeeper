@@ -25,5 +25,16 @@ production:
     adapter: postgresql
     database: hkeeper_db
     pool: 5
-    username: <%= Rails.application.credentials.db_credentials[:username] %>
-    password: <%= Rails.application.credentials.db_credentials[:password] %>
+    username: <%= Rails.application.credentials.dig(:db_credentials, :username) %>
+    password: <%= Rails.application.credentials.dig(:db_credentials, :password) %>
+    
+staging:
+    host: localhost
+    adapter: postgresql
+    database: beta_hkeeper_db
+    pool: 5
+    username: <%= Rails.application.credentials.dig(:db_credentials, :username) %>
+    password: <%= Rails.application.credentials.dig(:db_credentials, :password) %>
+    
+    
+

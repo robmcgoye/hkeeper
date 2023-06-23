@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -101,11 +101,10 @@ Rails.application.configure do
     port: CONFIG[:smtp_port],
     authentication: :plain,
     enable_starttls_auto: true,
-    user_name:  Rails.application.credentials.smtp[:user_name],
-    password: Rails.application.credentials.smtp[:password]
+    user_name:  Rails.application.credentials.dig(:smtp, :user_name),
+    password: Rails.application.credentials.dig(:smtp, :password)
   }
-  config.active_record.encryption.key_derivation_salt = Rails.application.credentials.active_record_encryption[:key_derivation_salt]
-  config.active_record.encryption.primary_key = Rails.application.credentials.active_record_encryption[:primary_key]
-  config.active_record.encryption.deterministic_key = Rails.application.credentials.active_record_encryption[:deterministic_key]
-
+  config.active_record.encryption.key_derivation_salt = Rails.application.credentials.dig(:active_record_encryption, :key_derivation_salt)
+  config.active_record.encryption.primary_key = Rails.application.credentials.dig(:active_record_encryption, :primary_key)
+  config.active_record.encryption.deterministic_key = Rails.application.credentials.dig(:active_record_encryption, :deterministic_key)
 end
