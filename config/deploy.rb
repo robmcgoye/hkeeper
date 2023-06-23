@@ -29,7 +29,7 @@ end
 # append :linked_files, "config/database.yml", 'config/master.key'
 append :linked_files, "config/master.key"
 append :linked_files, "config/application.yml"
-ppend :linked_files, "config/credentials/development.key"
+append :linked_files, "config/credentials/development.key"
 append :linked_files, "config/credentials/production.key"
 append :linked_files, "config/credentials/staging.key"
 
