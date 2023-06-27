@@ -58,7 +58,7 @@ gem 'strscan', '=3.0.1'
 # gem 'blind_index', '~> 2.3'
 gem 'rolify', '~> 6.0'
 gem 'pundit', '~> 2.2'
-gem 'resque', '~> 2.4'
+gem 'resque', '~> 2.5'
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 gem 'whenever', '~> 1.0', require: false
 gem 'money-rails', '~> 1.15'
