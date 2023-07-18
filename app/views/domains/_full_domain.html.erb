@@ -56,17 +56,18 @@
     </div>
     <div class="col-auto">
       <div class="btn-group">
-        <%= link_to domains_path, class: "btn btn-sm btn-outline-dark" do %>
+        <%= button_to domains_path, params: {page: @page}, method: :get, class: "btn btn-sm btn-outline-dark" do %>
+        <%#= link_to domains_path, class: "btn btn-sm btn-outline-dark" do %>
           <i class="bi bi-caret-down-fill pe-1"></i>
         <% end %>
         <% if policy(:domain).edit? %>
-          <%#= link_to edit_domain_path(domain, page: page, index: index), class: "btn btn-sm btn-outline-dark" do %>
-            <%# <i class="bi bi-pencil pe-1"></i> %>
-          <%# end %>
+        <%# , index: index %>
+          <%= link_to edit_domain_path(domain, page: @page), class: "btn btn-sm btn-outline-dark" do %>
+             <i class="bi bi-pencil pe-1"></i> 
+          <% end %>
         <% end %>
         <% if policy(:domain).destroy? %>
-          <%#= button_to domain, params: {page: page}, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_frame: "filter_results", turbo_confirm: 'Are you sure?'}} do %>
-          <%= button_to domain, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_frame: "filter_results", turbo_confirm: 'Are you sure?'}} do %>
+          <%= button_to domain, params: {page: @page}, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_frame: "filter_results", turbo_confirm: 'Are you sure?'}} do %>
             <i class="bi bi-trash pe-1"></i>
           <% end %>
         <% end %>

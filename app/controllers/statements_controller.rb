@@ -52,7 +52,7 @@ class StatementsController < ApplicationController
   def set_statement
     @statement = Statement.find(params[:id])
     authorize @statement
-    @biller = @statement.service.account.billers.first
+    @biller = @statement.account.billers.first
   end
 
   def statement_params

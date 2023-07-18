@@ -1,6 +1,6 @@
 class Domain < ApplicationRecord
   belongs_to :account
-  has_many :statements, :as => :service, dependent: :destroy
+  has_many :invoices, :as => :service, dependent: :destroy
   
   VALID_DOMAIN_REGEX = /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}\z/i
   validates :name, presence: true, 
@@ -19,17 +19,20 @@ class Domain < ApplicationRecord
   scope :sort_on_name, -> { order(:name) }
   scope :sort_on_expires, -> { order(:expires_on) } 
   scope :sort_on_created, -> { order(created_at: :desc) }
+  scope :last_billed, -> { joins(:invoice)}
 
   def annual_fee
     return registration_fee_cents + hosting_fee_cents
   end
 
   def billed_date
-    statement = self.statements.last_billed.take
-    if statement.nil?
+    statement = Statement.last_billed(Invoice.domain_statement_ids(self.id)).first
+    if statement.nil? 
       "Not Billed Yet"
     else
       statement.invoiced_at.strftime(" %m/%d/%Y")
     end
   end
+
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_143125) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_01_113426) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -82,6 +82,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_143125) do
     t.index ["account_id"], name: "index_domains_on_account_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "service_id"
+    t.string "service_type"
+    t.integer "statement_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_type", "service_id"], name: "index_invoices_on_service_type_and_service_id"
+    t.index ["statement_id"], name: "index_invoices_on_statement_id"
+  end
+
   create_table "job_events", force: :cascade do |t|
     t.text "notes"
     t.integer "job_id", null: false
@@ -134,9 +144,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_143125) do
     t.datetime "invoiced_at"
     t.datetime "emailed_at"
     t.datetime "due_at"
-    t.integer "service_id"
-    t.string "service_type"
-    t.index ["service_type", "service_id"], name: "index_statements_on_service_type_and_service_id"
   end
 
   create_table "unifi_sites", force: :cascade do |t|
@@ -177,6 +184,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_143125) do
   add_foreign_key "computer_billings", "accounts"
   add_foreign_key "computers", "accounts"
   add_foreign_key "domains", "accounts"
+  add_foreign_key "invoices", "statements"
   add_foreign_key "job_events", "jobs"
   add_foreign_key "jobs", "computers"
   add_foreign_key "line_items", "statements"

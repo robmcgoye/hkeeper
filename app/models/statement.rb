@@ -1,19 +1,16 @@
 class Statement < ApplicationRecord
-  belongs_to :service, :polymorphic => true
+  has_many :invoices
+  # , dependent: :destroy
   has_many :line_items, dependent: :destroy
-  # attribute :email_user
+
   enum :status, { pending: 0, unpaid: 1, paid: 2, voided: 3 }, default: :pending
 
-  scope :annual_billing, -> { where('invoiced_at > ?', 1.year.ago )}
-  scope :monthly_billing, -> { where('invoiced_at > ?', 1.month.ago )}
   scope :unpaid, -> { where(status: 'unpaid').order(invoiced_at: :desc) }
   scope :paid, -> { where(status: 'paid').order(invoiced_at: :desc) }
   scope :pending, -> { where(status: 'pending').order(invoiced_at: :desc) }
   scope :voided, -> { where(status: 'voided').order(invoiced_at: :desc) }
-  scope :last_billed, -> { where(status: ['paid', 'unpaid']).order(invoiced_at: :desc)}
+  scope :last_billed, ->(statement_ids) { where(id: statement_ids).where(status: ['paid', 'unpaid']).order(invoiced_at: :desc) }
   scope :empty, -> { where(status: 'empty') }
-  scope :unifi_ids, -> (unifisite_ids) { where(service_id: unifisite_ids).where(service_type: "UnifiSite").pluck(:id) }
-  scope :domain_ids, -> (domain_ids) { where(service_id: domain_ids).where(service_type: "Domain").pluck(:id) }
 
   before_create do
     if Statement.count > 0
@@ -31,9 +28,11 @@ class Statement < ApplicationRecord
   end
 
   def self.statements_in_account(account_id)
-    unifi_ids = self.unifi_ids(UnifiSite.find_by_account_ids(account_id))
-    domain_ids = self.domain_ids(Domain.find_by_account_ids(account_id))
-    self.where(id: (domain_ids + unifi_ids))
+    unifi_statement_ids = Invoice.unifi_statement_ids(UnifiSite.find_by_account_ids(account_id))
+    domain_statement_ids = Invoice.domain_statement_ids(Domain.find_by_account_ids(account_id))
+    computer_statement_ids = Invoice.computer_statement_ids(ComputerBilling.find_by_account_ids(account_id))
+    
+    self.where(id: (unifi_statement_ids + domain_statement_ids + computer_statement_ids).uniq)
   end
 
   def total
@@ -50,6 +49,10 @@ class Statement < ApplicationRecord
     else
       emailed_at.strftime(" %m/%d/%Y")
     end
+  end
+
+  def account
+    self.invoices.first.service.account
   end
 
 end

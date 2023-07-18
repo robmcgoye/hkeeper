@@ -22,7 +22,7 @@
         <% @statements.each do |statement| %>
           <tr>
             <td><%= statement.invoiced_at.strftime(" %m/%d/%Y") %></td>
-            <td><%= statement.service.account.name %></td>
+            <td><%= statement.account.name %></td>
             <td><%= statement.invoice_number %></td>
             <td><%= statement.status %></td>
             <td><%= Money.us_dollar(statement.total).format %></td>

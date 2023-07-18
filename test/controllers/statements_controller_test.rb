@@ -8,7 +8,8 @@ class StatementsControllerTest < ActionDispatch::IntegrationTest
     account = Account.create(name: "abc", active: true)
     biller = create_biller(account)
     unifi_site = UnifiSite.create(account_id: account.id, name: "uni site", hosting_fee: "99")
-    @statement = Statement.create( service_id: unifi_site.id, service_type: "UnifiSite")
+    @statement = Statement.create
+    Invoice.create(service_id: unifi_site.id, service_type: "UnifiSite", statement_id: @statement.id)
   end
 
   test "should get index" do

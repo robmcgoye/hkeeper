@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :domains
   resources :unifi_sites
   resources :statements, except: [:create, :new, :destroy]
-  post "statements_filter", to: "statements#filter"
+  get "statements_filter", to: "statements#filter"
   post "computers_filter", to: "computers#filter"
   get "domains_filter", to: "domains#filter"
   get "domains_sort", to: "domains#sort"

@@ -27,6 +27,7 @@ class DomainsController < ApplicationController
   end
 
   def show
+    @page = params[:page]
   end
 
   def new

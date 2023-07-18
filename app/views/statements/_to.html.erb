@@ -9,7 +9,7 @@
 
           <% if @biller.nil? %>
             No Address / email on file!<br>
-            <%= link_to new_account_biller_path(@statement.service.account), class: "btn btn-sm btn-outline-dark" do %>
+            <%= link_to new_account_biller_path(@statement.account), class: "btn btn-sm btn-outline-dark" do %>
               <i class="bi bi-plus-circle pe-1"></i>Add Address
             <% end %>
           <% else %>

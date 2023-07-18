@@ -1,6 +1,6 @@
 class UnifiSite < ApplicationRecord
   belongs_to :account
-  has_many :statements, :as => :service, dependent: :destroy
+  has_many :invoices, :as => :service, dependent: :destroy
 
   monetize :hosting_fee_cents
   validates :name, presence: true
@@ -10,8 +10,8 @@ class UnifiSite < ApplicationRecord
   scope :unifi_sites_in_account, -> (account_ids) { where(account_id: account_ids) }
 
   def billed_date
-    statement = self.statements.last_billed.take
-    if statement.nil?
+    statement = Statement.last_billed(Invoice.unifi_statement_ids(self.id)).first
+    if statement.nil? 
       "Not Billed Yet"
     else
       statement.invoiced_at.strftime(" %m/%d/%Y")

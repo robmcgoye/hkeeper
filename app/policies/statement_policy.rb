@@ -29,7 +29,7 @@ class StatementPolicy < ApplicationPolicy
   private
 
   def authorized_roles?
-    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.service.account }
+    @user.has_any_role? :admin, :tech, { name: :manager, resource: @record.account }
   end
 
 end

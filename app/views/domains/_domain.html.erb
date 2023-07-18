@@ -11,9 +11,8 @@
     </div>
     <div class="col">
       <div class="btn-group">
-        <%= link_to domain, class: "btn btn-sm btn-outline-dark" do %>
+        <%= button_to domain, params: {page: page}, method: :get, class: "btn btn-sm btn-outline-dark" do %>
           <i class="bi bi-caret-left-fill pe-1"></i>
-          <%# <i class="bi bi-folder-symlink pe-1"></i> %>
         <% end %>
         <% if policy(:domain).edit? %>
           <%= link_to edit_domain_path(domain, page: page, index: index), class: "btn btn-sm btn-outline-dark" do %>

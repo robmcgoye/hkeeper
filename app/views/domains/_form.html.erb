@@ -1,6 +1,5 @@
-<%# :data => {:turbo => "false"} %>
 <%= form_with model: domain  do |f| %>
-  <%#= binding.break %>
+
   <%= f.hidden_field :page, value: params[:page] %>
   <%= f.hidden_field :index, value: params[:index] %>
 
@@ -72,8 +71,8 @@
       <div class="btn-group">
         <%= f.button class: "btn btn-sm btn-outline-dark" do %>
           <i class="bi bi-save pe-1"></i>Save
-        <% end %> 
-        <%= link_to domains_path, class: "btn btn-sm btn-outline-dark" do %>
+        <% end %>
+        <%= link_to domains_path(page: params[:page]), class: "btn btn-sm btn-outline-dark" do %>
           <i class="bi bi-x-square pe-1"></i>Cancel
         <% end %>
       </div>
