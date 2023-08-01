@@ -1,0 +1,14 @@
+<%= turbo_frame_tag UnifiSite.new do %>
+  <div class="row">
+    <div class="col">
+      <h3>Unifi Sites</h3>
+    </div>
+    <div class="col-auto">
+      <% if policy(:domain).new? %>
+        <%= link_to new_unifi_site_path, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-plus-circle pe-1"></i>New Unifi Site
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

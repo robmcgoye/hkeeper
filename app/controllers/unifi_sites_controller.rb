@@ -11,12 +11,7 @@ class UnifiSitesController < ApplicationController
   end 
 
   def index
-    unifi_site_filter = get_filter(:unifi_site_filter)
-    if unifi_site_filter.nil?
-      @unifi_site_form = UnifiSiteFilterForm.new
-    else
-      @unifi_site_form = UnifiSiteFilterForm.new(unifi_site_filter)
-    end
+    @unifi_site_form = get_filter_form
     @pagy, @unifi_sites = pagy(@unifi_site_form.filter(policy_scope(UnifiSite)))
   end
 
@@ -26,6 +21,7 @@ class UnifiSitesController < ApplicationController
   end
 
   def show
+    @page = params[:page]
   end
 
   def edit
@@ -34,7 +30,15 @@ class UnifiSitesController < ApplicationController
   def create
     @unifi_site = UnifiSite.new(unifi_site_params)
     if @unifi_site.save
-      redirect_to unifi_site_url(@unifi_site), notice: "Unifi site was successfully created."
+      flash.now[:notice] = "Unifi site was successfully created."
+      @unifi_site_form = get_filter_form
+      @pagy, @unifi_sites = pagy(@unifi_site_form.filter(policy_scope(UnifiSite)))
+      render turbo_stream: [
+        turbo_stream.replace("filter_results", partial: "unifi_sites/filter_results"), 
+        # locals: {domains: @domains, pagy: @pagy}
+        turbo_stream.update(UnifiSite.new, partial: "unifi_sites/index_new"), 
+        turbo_stream.replace("notice", partial: "layouts/flash")
+      ]
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,7 +46,13 @@ class UnifiSitesController < ApplicationController
 
   def update
     if @unifi_site.update(unifi_site_params)
-      redirect_to unifi_site_url(@unifi_site), notice: "Unifi site  was successfully updated."
+      # redirect_to unifi_site_url(@unifi_site), notice: "Unifi site  was successfully updated."
+      flash.now[:notice] = "Unifi site was successfully updated."
+      render turbo_stream: [
+        turbo_stream.replace(@unifi_site, partial: "unifi_sites/unifi_site", locals: { unifi_site: @unifi_site, page: params[:unifi_site][:page].to_i, index: params[:unifi_site][:index].to_i }
+        ), 
+        turbo_stream.replace("notice", partial: "layouts/flash")
+      ]
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,10 +60,26 @@ class UnifiSitesController < ApplicationController
 
   def destroy
     @unifi_site.destroy
-    redirect_to unifi_site_url, notice: "Unifi site was successfully destroyed."
+    # redirect_to unifi_site_url, notice: "Unifi site was successfully destroyed."
+    flash.now[:notice] = "Unifi site was successfully deleted."
+    @unifi_site_form = get_filter_form
+    @pagy, @unifi_sites = pagy(@unifi_site_form.filter(policy_scope(UnifiSite)))
+    render turbo_stream: [
+      turbo_stream.replace("filter_results", partial: "unifi_sites/filter_results"),
+      turbo_stream.replace("notice", partial: "layouts/flash")
+    ]
   end
 
   private
+
+    def get_filter_form
+      unifi_site_filter = get_filter(:unifi_site_filter)
+      if unifi_site_filter.nil?
+        UnifiSiteFilterForm.new
+      else
+        UnifiSiteFilterForm.new(unifi_site_filter)
+      end
+    end
 
     def set_accounts
       @accounts = policy_scope(Account)

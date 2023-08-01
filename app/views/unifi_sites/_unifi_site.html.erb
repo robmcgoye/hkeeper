@@ -1,25 +1,30 @@
-<div class="card">
-
-  <div class="card-header fw-bold">
-    <%= unifi_site.name %>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col">
-          <b>Account:</b> <%= unifi_site.account.name %><br>
-      </div>
-      <div class="col">
-        <b>Billed on:</b> <%= unifi_site.billed_date %><br>
-        <b>Annual Fee:</b> <%= unifi_site.hosting_fee.format %>
+<%= turbo_frame_tag unifi_site do %>
+  <div class="row pt-1 <%= index.odd? ? "tb-bg-dark" : "tb-bg-light" %>">
+    <div class="col text-nowrap">
+      <%= unifi_site.account.name %>
+    </div>
+    <div class="col text-nowrap">
+      <%= unifi_site.name %>
+    </div>
+    <div class="col text-nowrap">
+      <%= unifi_site.billed_date %>
+    </div>
+    <div class="col">
+      <div class="btn-group">
+        <%= button_to unifi_site, params: {page: page}, method: :get, class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-caret-left-fill pe-1"></i>
+        <% end %>
+        <% if policy(:unifi_site).edit? %>
+          <%= link_to edit_unifi_site_path(unifi_site, page: page, index: index), class: "btn btn-sm btn-outline-dark" do %>
+            <i class="bi bi-pencil pe-1"></i>
+          <% end %>        
+        <% end %>
+        <% if policy(:domain).destroy? %>
+            <%= button_to unifi_site, params: {page: page}, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_frame: "filter_results", turbo_confirm: 'Are you sure?'}} do %>
+              <i class="bi bi-trash pe-1"></i>
+            <% end %>        
+        <% end %>
       </div>
     </div>
-    <div class="card">
-      <div class="card-body pt-1 ps-1">
-        <h6 class="card-title">Notes</h6>
-        <p class="card-text">
-          <%= unifi_site.notes %>
-        </p>
-      </div>
-    </div>  
   </div>
-</div>
+<% end %>

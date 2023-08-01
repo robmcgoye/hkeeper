@@ -1,25 +1,7 @@
-<div class="container py-3">
-  <div class="card mb-3 shadow-lg rounded border">
-    <div class="card-body text-dark">
-      <h3>Editing unifi site</h3>
 
-      <%= render "form", unifi_site: @unifi_site %>
-
-      <div class="btn-group pt-1">
-        <%= link_to unifi_sites_path, class: "btn btn-sm btn-outline-dark" do %>
-          <i class="bi bi-arrow-left-circle pe-1"></i>Back to unifi sites
-        <% end %>
-
-        <%= link_to @unifi_site, class: "btn btn-sm btn-outline-dark" do %>
-          <i class="bi bi-folder-symlink pe-1"></i>View
-        <% end %>        
-
-        <%= button_to @unifi_site, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} do %>
-          <i class="bi bi-trash pe-1"></i>Delete
-        <% end %>
-
-      </div>
-
-    </div>
+<%= turbo_frame_tag @unifi_site do %>
+  <div class="border border-primary border-2 p-2 m-1">
+    <h5>Editing unifi site</h5>
+    <%= render "form", unifi_site: @unifi_site %>
   </div>
-</div>
+<% end %>

@@ -1,27 +1,44 @@
-<%= form_with model: unifi_site, :data => {:turbo => "false"} do |f| %>
+<%= form_with model: unifi_site do |f| %>
+  <%= f.hidden_field :page, value: params[:page] %>
+  <%= f.hidden_field :index, value: params[:index] %>
+
   <%= render 'shared/error_messages', resource: unifi_site %>
 
-  <div class="field form-group pb-1">
-    <%= f.label "Account" %>
-      <%= f.collection_select :account_id, @accounts, :id, :name,  
-        {}, {class: "form-select"}  %>
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          Account
+          <%= f.collection_select :account_id, @accounts, :id, :name,  
+              {}, {class: "form-select"}  %>
+        </div>
+      </div>
+      <div class="row pt-1">
+        <div class="col">
+          Site Name<br />
+          <%= f.text_field :name, placeholder: "Site Name", class: "form-control form-control-sm" %>
+        </div>
+        <div class="col">
+          Hosting Fee<br />
+          <%= f.text_field :hosting_fee, class: "form-control form-control-sm" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Notes<br />
+          <%= f.text_area :notes, class: "form-control form-control-sm", rows: 4 %>
+        </div>
+      </div>
+    </div>
+     <div class="col-auto"> 
+      <div class="btn-group">
+        <%= f.button class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-save pe-1"></i>Save
+        <% end %>  
+        <%= link_to unifi_sites_path(page: params[:page]), class: "btn btn-sm btn-outline-dark" do %>
+          <i class="bi bi-x-square pe-1"></i>Cancel
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="field form-group pb-1">
-    <%= f.label "Site Name" %><br />
-    <%= f.text_field :name, placeholder: "Site Name", class: "form-control" %>
-  </div>
-  <div class="field form-group pb-1">
-    <%= f.label "Hosting Fee" %><br />
-    <%= f.text_field :hosting_fee, class: "form-control form-control-sm" %>
-  </div> 
-  <div class="field form-group">
-    <%= f.label "Notes" %><br />
-    <%= f.text_area :notes, class: "form-control", rows: 8 %>
-  </div>  
-  <div class="actions pt-2">
-    <%= f.button class: "btn btn-sm btn-outline-dark" do %>
-      <i class="bi bi-save pe-1"></i>Save
-    <% end %>  
-  </div>
-
 <% end %>

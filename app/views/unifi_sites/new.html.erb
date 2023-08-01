@@ -1,13 +1,7 @@
-<div class="container py-3">
-  <div class="card mb-3 shadow-lg rounded border">
-    <div class="card-body text-dark">
-      <h3>New unifi site</h3>
-      <%= render "form", unifi_site: @unifi_site %>
-      <div class="btn-group pt-1">
-        <%= link_to unifi_sites_path, class: "btn btn-sm btn-outline-dark" do %>
-          <i class="bi bi-arrow-left-circle pe-1"></i>Back to unifi sites
-        <% end %>
-      </div>
-    </div>
+
+<%= turbo_frame_tag UnifiSite.new do %>
+  <div class="border border-primary p-2 m-1">
+    <h3>New Unifi Site</h3>
+    <%= render "form", unifi_site: @unifi_site %>
   </div>
-</div>
+<% end %>
